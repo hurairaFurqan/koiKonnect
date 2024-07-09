@@ -3,8 +3,6 @@ import User from "@/src/models/user.model";
 import { NextRequest, NextResponse } from "next/server";
 import bycrptjs from 'bcryptjs'
 import jwt from 'jsonwebtoken';
-import { cookies } from "next/headers";
-
 connect();
 
 

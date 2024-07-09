@@ -21,7 +21,7 @@ export async function POST(request: NextRequest) {
             return NextResponse.json({ error: "Invalid Token" }, { status: 400 });
         }
 
-        console.log("ruser found in DB against given token", user);
+        console.log("user found in DB against given token", user);
 
         user.isVerified = true;
         user.verifyToken = undefined;
