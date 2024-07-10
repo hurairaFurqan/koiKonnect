@@ -1,0 +1,120 @@
+.inputGroup {
+    position: relative;
+
+}
+
+
+.inputGroup label {
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    transform: translateY(-50%);
+    font-size: 16px;
+    color: #5E5E5E;
+    padding: 0 5px;
+    pointer-events: none;
+    transition: .5s;
+}
+
+
+.inputGroup input {
+    width: 530px;
+    height: 55px;
+    font-size: 16px;
+    color: #5E5E5E;
+    padding: 0 10px;
+    background: #D9D9D9;
+    border: 1.2px solid #fff;
+    outline: none;
+    border-radius: 5px;
+}
+
+.inputGroup input:focus~label,
+.inputGroup input:valid~label {
+    top: 0;
+    font-size: 12px;
+    color: #F36E39;
+    background: #D9D9D9;
+}
+
+/* for row */
+
+.inputGroupRow {
+    position: relative;
+    margin: 5px 0;
+}
+
+
+.inputGroupRow label {
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    transform: translateY(-50%);
+    font-size: 16px;
+    color: #5E5E5E;
+    padding: 0 5px;
+    pointer-events: none;
+    transition: .5s;
+}
+
+
+.inputGroupRow input {
+    width: 200px;
+    height: 55px;
+    font-size: 16px;
+    color: #5E5E5E;
+    padding: 0 10px;
+    background: #D9D9D9;
+    border: 1.2px solid #fff;
+    outline: none;
+    border-radius: 5px;
+}
+
+.inputGroupRow input:focus~label,
+.inputGroupRow input:valid~label {
+    top: 0;
+    font-size: 12px;
+    color: #F36E39;
+    background: #D9D9D9;
+}
+
+.JoinUsButton {
+    background-color: #F36E39;
+    height: 60px;
+    width: 140px;
+    font-size: 18px;
+    color: white;
+    border-radius: 5px;
+}
+
+.JoinUsButton:hover {
+    background-color: transparent;
+    border: #F36E39;
+    border-style: solid;
+    color: black;
+}
+
+.termsNConditions {
+    color: #F36E39;
+    font-size: 10px;
+}
+
+.or {
+    color: #5E5E5E;
+    font-size: 14px;
+}
+
+.textColor {
+    color: #F36E39;
+}
+
+
+.icon {
+    display: inline-block;
+    background-size: cover;
+}
+
+.GoogleBtnReg:hover {
+    border: #F36E39;
+    border-style: solid;
+}
