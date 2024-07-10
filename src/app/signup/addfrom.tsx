@@ -31,16 +31,25 @@ const AddForm = () => {
         setLoading(true)
 
         // Send request to database
-        // try {
-        //     const res = await axios.post(`${BASIC_AUTH_URL}/signup`, user);
-        //     console.log(res);
+        try {
+            const res = await axios.post(`${BASIC_AUTH_URL}/signup`, user);
+            console.log(res);
 
 
-        // } catch (error: any) {
-        //     console.log(error.message);
+        } catch (error: any) {
+            console.log(error.message);
 
-        // }
+        }
 
+        setUser({
+            userName: "",
+            fName: "",
+            lName: "",
+            email: "",
+            userType: "",
+            password: "",
+            confirmPassword: "",
+        })
         setLoading(false)
 
     }
