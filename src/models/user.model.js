@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 
+
 const userSchema = new mongoose.Schema({
     userName: {
         type: String,
@@ -28,6 +29,11 @@ const userSchema = new mongoose.Schema({
     isVerified: {
         type: Boolean,
         default: false
+    },
+    userType: {
+        type: String,
+        enum: ['student', 'teacher', 'graduate'],
+        default: 'student'
     },
     forgotPasswordToken: String,
     forgotPasswordTokenExpiry: Date,

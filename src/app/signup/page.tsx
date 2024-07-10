@@ -8,13 +8,13 @@ const signUp = () => {
     return (<>
         <div className="grid grid-cols-2">
             <div className=" p-4 pt-20">
-                <div className="text-orange font-bold text-6xl text-center ">
+                <div className="orangeColor font-bold text-6xl text-center ">
                     Welcome to club of
                     <div className="">
                         KOI KONNECT
                     </div>
                 </div>
-                <div className="text-orange font-medium  text-center mt-4">
+                <div className="orangeColor font-medium  text-center mt-4">
                     Join the conversation!  Sign up now to connect,
                     <div>
                         share, and discover with our vibrant community.

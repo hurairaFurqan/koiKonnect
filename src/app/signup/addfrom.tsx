@@ -13,12 +13,13 @@ const AddForm = () => {
         fName: "",
         lName: "",
         email: "",
+        userType: "",
         password: "",
         confirmPassword: "",
     })
     const [loading, setLoading] = useState(false);
 
-    const onChangeHandler: React.ChangeEventHandler<HTMLInputElement> = (event) => {
+    const onChangeHandler: React.ChangeEventHandler<HTMLInputElement> & React.ChangeEventHandler<HTMLSelectElement> = (event) => {
         const { name, value } = event.target;
         setUser((values) => ({ ...user, [name]: value }))
     }
@@ -30,15 +31,15 @@ const AddForm = () => {
         setLoading(true)
 
         // Send request to database
-        try {
-            const res = await axios.post(`${BASIC_AUTH_URL}/signup`, user);
-            console.log(res);
+        // try {
+        //     const res = await axios.post(`${BASIC_AUTH_URL}/signup`, user);
+        //     console.log(res);
 
 
-        } catch (error: any) {
-            console.log(error.message);
+        // } catch (error: any) {
+        //     console.log(error.message);
 
-        }
+        // }
 
         setLoading(false)
 
@@ -80,6 +81,15 @@ const AddForm = () => {
                     <input name="userName" type="text" value={user.userName || ""} onChange={(e) => onChangeHandler(e)} required></input>
                     <label htmlFor="">*User Name</label>
                 </div>
+
+                <div className={styles.selectContainer}>
+                    <select className={styles.selectBox} name="userType" value={user.userType || ""} onChange={(e) => onChangeHandler(e)}>
+                        <option value={""}>*Select User Type</option>
+                        <option value={"student"}>Student</option>
+                        <option value={"teacher"}>Teacher</option>
+                        <option value={"graduate"}>Graduate</option>
+                    </select>
+                </div>
                 <div className={styles.inputGroup}>
                     <input name="password" type="password" value={user.password || ""} onChange={(e) => onChangeHandler(e)} required></input>
                     <label htmlFor="">*Password</label>
@@ -93,7 +103,7 @@ const AddForm = () => {
             </div>
             <div className="space-y-3">
                 <button type="submit" className={`${styles.JoinUsButton} font-semibold`}>Join US</button>
-                <p className={styles.termsNConditions}>By signing up you accept the Terms<br />
+                <p className={`${styles.termsNConditions} orangeColor`}>By signing up you accept the Terms<br />
                     of Service and Privacy Policy</p>
             </div>
             <div className={`${styles.or} grid place-content-center`}>OR</div>
