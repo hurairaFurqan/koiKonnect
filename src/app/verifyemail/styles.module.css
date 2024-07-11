@@ -1,0 +1,7 @@
+.emailButton button:hover{
+    background-color: transparent;
+    color: black;
+    border-width: 3px;
+    font-weight: 600;
+    border-color: #F36E39;
+}
