@@ -33,4 +33,6 @@ body {
 .bgOrangeColor{
   background-color: #F36E39;
 }
-
+.borderOrange{
+  border-color: #F36E39;
+}

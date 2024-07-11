@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import styles from "./styles.module.css"
 import axios from "axios";
 import { BASIC_AUTH_URL } from "../constants/constants";
+import Link from "next/link";
 
 const LoginForm = () => {
 
@@ -65,7 +66,7 @@ const LoginForm = () => {
                 <button className={styles.loginButton}>Login</button>
 
 
-                <div className={` w-1/2 mt-20 font-semibold flex justify-center`}>No account yet? <span className={`orangeColor hover:text-slate-500`}> Register Now!</span></div>
+                <Link href={"/signup"} className={` w-1/2 mt-20 font-semibold flex justify-center`}>No account yet? <span className={`orangeColor hover:text-slate-500`}> Register Now!</span></Link>
             </form>
 
         </div>)
