@@ -3,9 +3,12 @@ import React, { useState } from "react";
 import styles from "./styles.module.css"
 import axios from "axios";
 import { BASIC_AUTH_URL } from "../constants/constants";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const LoginForm = () => {
 
+    const router = useRouter();
     const [userCredentials, setuserCredentials] = useState({
         "email": "",
         "password": "",
@@ -27,6 +30,7 @@ const LoginForm = () => {
             const res = await axios.post(`${BASIC_AUTH_URL}/login`, userCredentials);
 
             console.log(res.data);
+            router.push("/profile")
 
 
         } catch (error: any) {
@@ -65,7 +69,7 @@ const LoginForm = () => {
                 <button className={styles.loginButton}>Login</button>
 
 
-                <div className={` w-1/2 mt-20 font-semibold flex justify-center`}>No account yet? <span className={`orangeColor hover:text-slate-500`}> Register Now!</span></div>
+                <Link href={"/signup"} className={` w-1/2 mt-20 font-semibold flex justify-center`}>No account yet? <span className={`orangeColor hover:text-slate-500`}> Register Now!</span></Link>
             </form>
 
         </div>)
