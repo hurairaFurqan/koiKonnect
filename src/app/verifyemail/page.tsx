@@ -15,17 +15,37 @@ const VerifyEmail = () => {
     const [verified, setVerified] = useState(false);
     const [error, setError] = useState("");
 
+    useEffect(() => {
+        // regular way of fetching token from URL
+
+        const urlToken = decodeURIComponent(window.location.search.split("=")[1]);
+        console.log("url token", urlToken);
+
+        setToken(urlToken || "")
+
+        // next js way of fetching token
+
+        // const { query }: any = router;
+        // const urlToken = query.token;
+        // setToken(decodeURIComponent(urlToken));
+
+    }, [router])
 
     const verifyUserEmail = async () => {
 
+        console.log("in button");
+        
+
         try {
+            console.log("token from url", token);
+
 
             // {token} vs token
             // check difference in both 
-            const res = await axios.post(`${BASIC_AUTH_URL}/verifyemail`, token);
+            const res = await axios.post(`${BASIC_AUTH_URL}/verifyemail`, {token});
             const data = res.data;
             console.log(token);
-            
+
             if (data.success === true) {
                 setVerified(true);
                 // just for the sake for implementation
@@ -36,18 +56,8 @@ const VerifyEmail = () => {
         }
     }
 
-    useEffect(() => {
-        // regular way of fetching token from URL
-        // const urlToken = window.location.search.split("=")[1];
-        // setToken(urlToken || "")
 
-        // next js way of fetching token
 
-        const { query }: any = router;
-        const urlToken = query.token;
-        setToken(urlToken);
-
-    }, [router])
     return <>
         <div className="flex flex-col items-center h-screen">
             <div className=" mt-24 flex flex-col items-center">
@@ -66,6 +76,10 @@ const VerifyEmail = () => {
                             <Link href={"/login"}>Click here to login</Link>
                         </div>
                     )
+                }
+
+                {
+                    token ? <p>{token}</p> : <p>no token</p>
                 }
                 <button onClick={verifyUserEmail} className={`bgOrangeColor p-3 rounded-full text-white w-52`}>Verify Email</button>
             </div>
