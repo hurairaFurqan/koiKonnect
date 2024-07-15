@@ -2,6 +2,7 @@
 import Image from "next/image";
 import React, { useEffect, useState } from "react"
 import verifyEmail from "@/public/verifyEmail.svg";
+import verifyEmailSuccess from "@/public/verifyEmailSuccess.svg"
 import styles from "./styles.module.css"
 import axios from "axios";
 import { BASIC_AUTH_URL } from "../constants/constants";
@@ -33,16 +34,11 @@ const VerifyEmail = () => {
 
     const verifyUserEmail = async () => {
 
-        console.log("in button");
-        
 
         try {
-            console.log("token from url", token);
-
-
             // {token} vs token
             // check difference in both 
-            const res = await axios.post(`${BASIC_AUTH_URL}/verifyemail`, {token});
+            const res = await axios.post(`${BASIC_AUTH_URL}/verifyemail`, { token });
             const data = res.data;
             console.log(token);
 
@@ -60,28 +56,35 @@ const VerifyEmail = () => {
 
     return <>
         <div className="flex flex-col items-center h-screen">
-            <div className=" mt-24 flex flex-col items-center">
+            <div className=" mt-10 flex flex-col items-center">
                 <p className=" w-fit text-5xl font-semibold">Verify your email</p>
                 <p className=" mt-2 text-zinc-600 text-base">You will need to verify your email to complete registration</p>
             </div>
-            <div className="mt-10">
-                <Image className="" src={verifyEmail} alt="verify email svg" width={450} />
-            </div>
-            <div className={`mt-4 space-y-3 flex flex-col items-center ${styles.emailButton}`}>
-                <p className="text-zinc-600 text-base">In order to verify your email click on the button “verify email” </p>
-                {
-                    verified && (
-                        <div>
-                            <p>You are verified successfully</p>
-                            <Link href={"/login"}>Click here to login</Link>
-                        </div>
-                    )
-                }
+            <div className="mt-7">
 
                 {
-                    token ? <p>{token}</p> : <p>no token</p>
+                    verified ? (<Image className="" src={verifyEmailSuccess} alt="verify email svg" width={450} />)
+                        :
+                        (<Image className="" src={verifyEmail} alt="verify email svg" width={450} />)
                 }
-                <button onClick={verifyUserEmail} className={`bgOrangeColor p-3 rounded-full text-white w-52`}>Verify Email</button>
+
+            </div>
+            <div >
+
+                {
+                    verified ? (
+                        <div className="flex flex-col items-center space-y-4">
+                            <p className="text-2xl font-semibold">You are verified successfully</p>
+                            <Link className="orangeColor font-semibold" href={"/login"}>Click here to login</Link>
+                        </div>
+                    )
+                        :
+                        <section className={`mt-4 space-y-3 flex flex-col items-center ${styles.emailButton}`}>
+                            <p className="text-zinc-600 text-base">In order to verify your email click on the button “verify email” </p>
+                            <button onClick={verifyUserEmail} className={`bgOrangeColor p-3 rounded-full text-white w-52`}>Verify Email</button>
+                        </section>
+                }
+
             </div>
         </div>
     </>
