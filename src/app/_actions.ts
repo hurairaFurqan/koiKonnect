@@ -29,7 +29,6 @@ export async function addEntry(prevState: any, formData: FormData) {
 
 
     try {
-        console.log("in here");
         const res = await axios.post(`${BASIC_AUTH_URL}/signup`, data)
         revalidatePath("/")
 

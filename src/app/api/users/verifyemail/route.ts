@@ -9,8 +9,11 @@ export async function POST(request: NextRequest) {
     try {
 
         const reqBody = await request.json();
-
+        
+        
+        
         const { token } = reqBody;
+        console.log("in verify email route", typeof reqBody, typeof token);
 
         if (!token) {
             return NextResponse.json({ error: "Token not received from client" }, { status: 404 });
