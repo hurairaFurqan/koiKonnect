@@ -49,6 +49,8 @@ const VerifyEmail = () => {
         } catch (error: any) {
             console.log(error.response.data);
 
+            setError(error.response.data.error);
+
         }
     }
 
@@ -72,17 +74,23 @@ const VerifyEmail = () => {
             <div >
 
                 {
-                    verified ? (
-                        <div className="flex flex-col items-center space-y-4">
-                            <p className="text-2xl font-semibold">You are verified successfully</p>
-                            <Link className="orangeColor font-semibold" href={"/login"}>Click here to login</Link>
+                    error ? (
+                        <div className="mt-5">
+                            <pre>Please create your account again {error}</pre>
                         </div>
                     )
                         :
-                        <section className={`mt-4 space-y-3 flex flex-col items-center ${styles.emailButton}`}>
-                            <p className="text-zinc-600 text-base">In order to verify your email click on the button “verify email” </p>
-                            <button onClick={verifyUserEmail} className={`bgOrangeColor p-3 rounded-full text-white w-52`}>Verify Email</button>
-                        </section>
+                        verified ? (
+                            <div className="flex flex-col items-center space-y-4">
+                                <p className="text-2xl font-semibold">You are verified successfully</p>
+                                <Link className="orangeColor font-semibold" href={"/login"}>Click here to login</Link>
+                            </div>
+                        )
+                            :
+                            <section className={`mt-4 space-y-3 flex flex-col items-center ${styles.emailButton}`}>
+                                <p className="text-zinc-600 text-base">In order to verify your email click on the button “verify email” </p>
+                                <button onClick={verifyUserEmail} className={`bgOrangeColor p-3 rounded-full text-white w-52`}>Verify Email</button>
+                            </section>
                 }
 
             </div>
