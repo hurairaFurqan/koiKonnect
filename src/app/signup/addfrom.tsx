@@ -8,8 +8,13 @@ import googleButton from "@/public/googleButtonRegular.svg"
 import styles from "./styles.module.css";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { useFormState } from "react-dom";
+import { addEntry } from "../_actions";
+
+
 
 const AddForm = () => {
+    const[state, setState] = useFormState(addEntry, null);
     const router = useRouter();
     const [user, setUser] = useState({
         userName: "",
@@ -21,7 +26,8 @@ const AddForm = () => {
         confirmPassword: "",
     })
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState("");
+    const [error, setError] = useState(false);
+
 
     const onChangeHandler: React.ChangeEventHandler<HTMLInputElement> & React.ChangeEventHandler<HTMLSelectElement> = (event) => {
         const { name, value } = event.target;
@@ -38,27 +44,32 @@ const AddForm = () => {
             try {
                 const res = await axios.post(`${BASIC_AUTH_URL}/signup`, user);
                 console.log(res.data);
-
+                setUser({
+                    userName: "",
+                    fName: "",
+                    lName: "",
+                    email: "",
+                    userType: "",
+                    password: "",
+                    confirmPassword: "",
+                })
+                setError(true)
+                router.push('/login');
 
             } catch (error: any) {
-                console.log(error.message);
-                setError(error.message);
+
+                throw new Error("user already exist")
+                console.log("in catch", error.message);
+                // return {
+                //     message: error.message
+                // }
+                // setError(error.message);
 
             }
 
-            setUser({
-                userName: "",
-                fName: "",
-                lName: "",
-                email: "",
-                userType: "",
-                password: "",
-                confirmPassword: "",
-            })
-            setError("")
-            router.push('/login');
+
         } else {
-            setError("Password does not match!")
+            // setError("Password does not match!")
         }
 
 
@@ -80,7 +91,7 @@ const AddForm = () => {
         </div>
 
 
-        <form className="p-10 space-y-6 " onSubmit={handleSubmit}>
+        <form className="p-10 space-y-6 " action={setState}>
             <div className="flex space-x-6  justify-between">
 
                 <div className={styles.inputGroupRow}>
