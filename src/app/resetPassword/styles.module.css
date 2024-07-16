@@ -1,12 +1,3 @@
-.emailButton button:hover{
-    background-color: transparent;
-    color: black;
-    border-width: 3px;
-    font-weight: 600;
-    border-color: #F36E39;
-}
-
-
 .inputGroupRow {
     position: relative;
     margin: 5px 0;
@@ -27,7 +18,7 @@
 
 
 .inputGroupRow input {
-    width: 350px;
+    width: 300px;
     height: 55px;
     font-size: 16px;
     color: #5E5E5E;
@@ -50,7 +41,7 @@
 .JoinUsButton {
     background-color: #F36E39;
     height: 60px;
-    width: 350px;
+    width: 300px;
     font-size: 18px;
     color: white;
     margin-top: 30px;
@@ -63,4 +54,3 @@
     border-style: solid;
     color: black;
 }
-
