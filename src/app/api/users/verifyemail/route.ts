@@ -27,7 +27,7 @@ export async function POST(request: NextRequest) {
             user.verifyToken = undefined;
             user.verifyTokenExpiry = undefined;
             const updatedUser = await user.save();
-            return NextResponse.json({ success: true, message: "user verified successfully", updatedUser });
+            return NextResponse.json({ success: true, message: "User verified successfully", updatedUser });
 
         } else {
 
@@ -46,7 +46,7 @@ export async function POST(request: NextRequest) {
             user.password = hashPassword;
             const updatedUser = await user.save();
 
-            return NextResponse.json({ success: true, message: "user password changed successfully", updatedUser });
+            return NextResponse.json({ success: true, message: "User password updated Successfully", updatedUser });
         }
 
     } catch (error: any) {

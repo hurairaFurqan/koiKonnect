@@ -6,7 +6,8 @@ export function middleware(req: NextRequest) {
 
     const isPublicPath = path === '/login' || path === "/signup" || path === '/verifyemail'
 
-    const token = req.cookies.get("token")?.value || '';
+    const token = req.cookies.get("token")?.value || ""; 
+    
     if (isPublicPath && token) {
         console.log("you are hitting public route while having token in cookies");
         

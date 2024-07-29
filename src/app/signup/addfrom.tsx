@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import KOILogo from '@/public/KOILogo.svg'
 import googleButton from "@/public/googleButtonRegular.svg"
@@ -14,9 +14,9 @@ import { addEntry } from "../_actions";
 function SubmitButton() {
     const { pending } = useFormStatus();
     return (<>
-        {pending ? <div className="flex items-center w-fit space-x-2 border-4 rounded-lg borderOrange p-1 bo">
+        {pending ? <div className="flex items-center w-fit place-content-around space-x-2 border-4 rounded-lg borderOrange p-1">
             <div className={styles.loader}></div>
-            <div className="font-semibold text-lg orangeColor">Processing</div>
+            <div className="font-semibold text-lg orangeColor">Creating your account</div>
         </div>
             :
             <button type="submit" className={`${styles.JoinUsButton} font-semibold`} >Join Us</button>}
@@ -25,23 +25,22 @@ function SubmitButton() {
 
 
 const initialState = {
-    message: "",
-    success: false,
+    successMessage: "",
+    errorMessage: ""
 }
 
 const AddForm = () => {
     const [state, setState] = useFormState(addEntry, initialState);
 
     const router = useRouter();
-    const [user, setUser] = useState({
-        userName: "",
-        fName: "",
-        lName: "",
-        email: "",
-        userType: "",
-        password: "",
-        confirmPassword: "",
-    })
+
+    useEffect(() => {
+
+        if (state.successMessage) {
+            router.push("/login")
+        }
+
+    }, [state.successMessage])
     return (<>
 
         <section className=" mt-3 flex justify-center">
@@ -56,7 +55,10 @@ const AddForm = () => {
 
         </section>
 
-
+        <div className="flex justify-center">
+            {state.errorMessage && <div className="text-red-700">!{state.errorMessage}</div>}
+            {state.successMessage && <div className="text-green-700">{state.successMessage}</div>}
+        </div>
         <form className="p-10 space-y-6 " action={setState}>
             <div className="flex space-x-6  justify-between">
 
@@ -99,10 +101,6 @@ const AddForm = () => {
             </div>
             <div className="space-y-3">
                 <SubmitButton />
-
-
-                <p>{state?.message}</p>
-
                 <p className={`${styles.termsNConditions} orangeColor`}>By signing up you accept the Terms<br />
                     of Service and Privacy Policy</p>
             </div>

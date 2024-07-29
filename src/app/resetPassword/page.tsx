@@ -9,6 +9,8 @@ import { BASIC_AUTH_URL } from "../constants/constants"
 const ResetPassword = () => {
 
     const [email, setEmail] = useState("");
+    const [error, setError] = useState("");
+    const [success, setSuccess] = useState("");
 
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -17,9 +19,11 @@ const ResetPassword = () => {
 
         try {
             const res = await axios.post(`${BASIC_AUTH_URL}/resetPassword`, { email });
-            console.log(res.data);
+            setSuccess(res.data.message)
+            setError("")
         } catch (error: any) {
-            console.log(error.response.data);
+            setError(error.response.data.error);
+            setSuccess("");
         }
 
     }
@@ -43,12 +47,17 @@ const ResetPassword = () => {
                 </div>
 
 
+
                 <button type="submit" className={`${styles.JoinUsButton} font-semibold`} >Reset Password</button>
 
             </form>
 
-
-        </div></>
+            <div className="mt-4">
+                {error && <div className="text-red-700">!{error}</div>}
+                {success && <div className="text-green-700">{success}</div>}
+            </div>
+        </div>
+    </>
 }
 
 export default ResetPassword
