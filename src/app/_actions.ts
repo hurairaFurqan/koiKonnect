@@ -75,4 +75,7 @@ export async function addEntry(prevState: any, formData: FormData) {
     }
 }
 
+export async function deleteToken() {
+    cookies().delete("token");
+}
 
