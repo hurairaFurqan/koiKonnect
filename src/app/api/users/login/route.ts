@@ -21,7 +21,7 @@ export async function POST(req: NextRequest) {
 
         const validPassword = await bycrptjs.compare(password, user.password);
         if (!validPassword) {
-            return NextResponse.json({ error: "Wrong password" }, { status: 400 });
+            return NextResponse.json({ error: "Sorry, your password was incorrect. Please double-check your password." }, { status: 400 });
         }
 
         if (!user.isVerified) {
