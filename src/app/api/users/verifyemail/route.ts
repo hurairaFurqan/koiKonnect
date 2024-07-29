@@ -29,6 +29,7 @@ export async function POST(request: NextRequest) {
             const updatedUser = await user.save();
             return NextResponse.json({ success: true, message: "User verified successfully", updatedUser });
 
+
         } else {
 
             const { password } = reqBody;
@@ -46,7 +47,9 @@ export async function POST(request: NextRequest) {
             user.password = hashPassword;
             const updatedUser = await user.save();
 
+
             return NextResponse.json({ success: true, message: "User password updated Successfully", updatedUser });
+
         }
 
     } catch (error: any) {

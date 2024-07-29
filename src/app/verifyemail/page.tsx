@@ -20,7 +20,9 @@ const VerifyEmail = () => {
         password: "",
         confirmPassword: ""
     })
+
     const [successMessage, setSuccessMessage] = useState("");
+
 
     useEffect(() => {
         // regular way of fetching token from URL
@@ -84,6 +86,7 @@ const VerifyEmail = () => {
         e.preventDefault();
 
         console.log(pass);
+
         if (pass.password === pass.confirmPassword) {
 
 
@@ -106,6 +109,7 @@ const VerifyEmail = () => {
             setError("Password don't match")
             setSuccessMessage("");
         }
+
     }
 
 
@@ -117,6 +121,7 @@ const VerifyEmail = () => {
                     <div className=" mt-10 flex flex-col items-center">
                         <p className=" w-fit text-5xl font-semibold">Verify your email</p>
                         <p className=" mt-2 text-zinc-600 text-base">You will need to verify your email to complete registration</p>
+
                     </div>
                     <div className="mt-7">
 
@@ -157,6 +162,7 @@ const VerifyEmail = () => {
                     <div className=" mt-10 flex flex-col items-center">
                         <p className=" w-fit text-5xl font-semibold">Reset your Password</p>
                         <p className=" mt-2 text-zinc-600 text-base">Time for a fresh start! Go ahead and set a new Password</p>
+
                         <div className="mt-2">
                             {error && <div className="text-red-700">!{error}</div>}
                             {successMessage && <div className="text-green-700">{successMessage}</div>}
@@ -173,6 +179,7 @@ const VerifyEmail = () => {
                             <input name="confirmPassword" type="password" required value={pass.confirmPassword || ""} onChange={(e) => onChangeHandler(e)}></input>
                             <label htmlFor="">*Confirm Password</label>
                         </div>
+
 
 
                         <button type="submit" className={`${styles.JoinUsButton} font-semibold`} >Save Changes</button>
