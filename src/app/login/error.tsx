@@ -1,6 +1,7 @@
 "use client"
-import errorIllustration from "@/public/errorIllustration.svg"
+
 import Image from "next/image"
+import errorIllustration from "@/public/errorIllustration.svg"
 
 type ErrorProps = {
     error: Error,
@@ -8,8 +9,6 @@ type ErrorProps = {
 }
 
 export default function Error({ error, reset }: ErrorProps) {
-    
-
     return (<div className="bg-black flex justify-center items-center h-screen">
         <div className="bg-white w-2/5 h-3/5 rounded-3xl p-3">
             <div>

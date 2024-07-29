@@ -1,10 +1,40 @@
 "use server"
 
 import axios from "axios"
-import { signupSchema } from "../helpers/zodSchema"
+import { loginSchema, signupSchema } from "../helpers/zodSchema"
 import { BASIC_AUTH_URL } from "./constants/constants"
 import { revalidatePath } from "next/cache"
+import { cookies } from "next/headers"
 
+export async function loginEntry(prevState: any, formData: FormData) {
+    const result = loginSchema.safeParse({
+        email: formData.get("email"),
+        password: formData.get("password",)
+    })
+    // if (!result.success) {
+
+    //     return { message: result.error.issues[0].message, success: false }
+    // }
+    const data = result.data;
+
+    try {
+        const res = await axios.post(`${BASIC_AUTH_URL}/login`, data);
+
+        revalidatePath("/")
+        cookies().set("token", res.data.sessionToken);
+
+        const resData = {
+
+            successMessage: res.data.message,
+            errorMessage: ""
+        }
+        return resData
+
+    } catch (error: any) {
+        return { successMessage: "", errorMessage: error.response.data.error };
+    }
+
+}
 
 export async function addEntry(prevState: any, formData: FormData) {
     const result = signupSchema.safeParse({
@@ -19,11 +49,11 @@ export async function addEntry(prevState: any, formData: FormData) {
     })
 
     if (!result.success) {
-        
-        console.log( result.error.issues[0].message);
+
+        console.log(result.error.issues[0].message);
 
 
-        return { message : result.error.issues[0].message, success: false};
+        return { successMessage: "", errorMessage: result.error.issues[0].message };
     }
     const data = result.data;
 
@@ -33,18 +63,16 @@ export async function addEntry(prevState: any, formData: FormData) {
         revalidatePath("/")
 
         const resData = {
-            message: res.data.message,
-            success: res.data.success
+            successMessage: res.data.message,
+            errorMessage: ""
         }
         return resData;
 
     } catch (error: any) {
         console.log("in catch block in action.ts", error.response.data.error);
-        return { message: error.response.data.error, success: false }
+        return { successMessage: "", errorMessage: error.response.data.error }
 
     }
-
-    // if (result.error) {
-    //     return { error: result.error.format() };
-    // }
 }
+
+

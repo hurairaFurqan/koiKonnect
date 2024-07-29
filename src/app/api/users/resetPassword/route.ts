@@ -21,9 +21,7 @@ export async function POST(request: NextRequest) {
 
         await sendEmail({email, emailType: "ResetPassword", userId : user._id})
 
-        
-
-        return NextResponse.json({ success: true, message: "email sent successfully" }, { status: 200 })
+        return NextResponse.json({ success: true, message: "A link has been sent to given email for password update" }, { status: 200 })
 
     } catch (error: any) {
         return NextResponse.json({ error: error.message }, { status: 500 })

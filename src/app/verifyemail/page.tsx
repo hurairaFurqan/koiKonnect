@@ -21,6 +21,9 @@ const VerifyEmail = () => {
         confirmPassword: ""
     })
 
+    const [successMessage, setSuccessMessage] = useState("");
+
+
     useEffect(() => {
         // regular way of fetching token from URL
 
@@ -84,17 +87,28 @@ const VerifyEmail = () => {
 
         console.log(pass);
 
-        try {
-            const res = await axios.post(`${BASIC_AUTH_URL}/verifyemail`, { token, emailType, password: pass.password });
-            console.log(res.data);
-            
+        if (pass.password === pass.confirmPassword) {
 
-        } catch (error: any) {
-            console.log(error.response.data);
 
+            try {
+                const res = await axios.post(`${BASIC_AUTH_URL}/verifyemail`, { token, emailType, password: pass.password });
+                console.log(res.data);
+                setSuccessMessage(res.data.message)
+                setError("")
+
+
+            } catch (error: any) {
+                console.log(error.response.data);
+                setError(error.response.data.error);
+                setSuccessMessage("");
+            }
+
+
+
+        } else {
+            setError("Password don't match")
+            setSuccessMessage("");
         }
-
-
 
     }
 
@@ -107,8 +121,7 @@ const VerifyEmail = () => {
                     <div className=" mt-10 flex flex-col items-center">
                         <p className=" w-fit text-5xl font-semibold">Verify your email</p>
                         <p className=" mt-2 text-zinc-600 text-base">You will need to verify your email to complete registration</p>
-                        <p>{token}</p>
-                        <p className="flex flex-col">{emailType}</p>
+
                     </div>
                     <div className="mt-7">
 
@@ -149,9 +162,14 @@ const VerifyEmail = () => {
                     <div className=" mt-10 flex flex-col items-center">
                         <p className=" w-fit text-5xl font-semibold">Reset your Password</p>
                         <p className=" mt-2 text-zinc-600 text-base">Time for a fresh start! Go ahead and set a new Password</p>
+
+                        <div className="mt-2">
+                            {error && <div className="text-red-700">!{error}</div>}
+                            {successMessage && <div className="text-green-700">{successMessage}</div>}
+                        </div>
                     </div>
 
-                    <form onSubmit={handleSubmit} className="mt-20 space-y-12">
+                    <form onSubmit={handleSubmit} className="mt-16 space-y-12">
 
                         <div className={styles.inputGroupRow}>
                             <input name="password" type="password" required value={pass.password || ""} onChange={(e) => onChangeHandler(e)}></input>
@@ -161,6 +179,7 @@ const VerifyEmail = () => {
                             <input name="confirmPassword" type="password" required value={pass.confirmPassword || ""} onChange={(e) => onChangeHandler(e)}></input>
                             <label htmlFor="">*Confirm Password</label>
                         </div>
+
 
 
                         <button type="submit" className={`${styles.JoinUsButton} font-semibold`} >Save Changes</button>
