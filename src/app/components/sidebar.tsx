@@ -77,7 +77,7 @@ const SideBar = () => {
 
             </div>
             <div>
-                <button className="mt-24 flex items-center" onClick={handleLogout}>
+                <button className="mt-20 flex items-center" onClick={handleLogout}>
                     <Image src={logoutIcon} alt="logout icon" width={22} height={24}></Image>
                     <div className="ml-16">Logout</div>
                 </button>
