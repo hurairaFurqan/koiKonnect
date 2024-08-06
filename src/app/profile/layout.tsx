@@ -14,7 +14,7 @@ export default function Layout({ children }: Readonly<{ children: React.ReactNod
                     <div className={`${styles.rightBase} p-6`} >
 
                         <Header></Header>
-                        <main className="">{children}</main>
+                        <main className={styles.main}>{children}</main>
                     </div>
                 </div>
             </div>
