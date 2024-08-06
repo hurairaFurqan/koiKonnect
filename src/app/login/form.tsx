@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useFormState, useFormStatus } from "react-dom";
 import { loginEntry } from "../_actions";
+import { authUrlSlug, sideNavUrlSlug } from "../constants/constants";
 
 
 function SubmitButton() {
@@ -31,7 +32,7 @@ const LoginForm = () => {
     useEffect(() => {
 
         if (userCredentials.successMessage) {
-            router.push("/profile")
+            router.push(sideNavUrlSlug.feed)
         }
 
     }, [userCredentials.successMessage])
@@ -60,13 +61,13 @@ const LoginForm = () => {
                     </div>
                 </div>
                 <div>
-                    <Link href={"/resetPassword"} className="w-1/2 font-semibold orangeColor text-xs hover:text-slate-500">Forgot Password?</Link>
+                    <Link href={authUrlSlug.resetPassword} className="w-1/2 font-semibold orangeColor text-xs hover:text-slate-500">Forgot Password?</Link>
                 </div>
                 <div className="mt-3">
                     <SubmitButton></SubmitButton>
                 </div>
 
-                <Link href={"/signup"} className={` w-1/2 mt-20 font-semibold flex justify-center`}>No account yet? <span className={`orangeColor hover:text-slate-500`}> Register Now!</span></Link>
+                <Link href={authUrlSlug.register} className={` w-1/2 mt-20 font-semibold flex justify-center`}>No account yet? <span className={`orangeColor hover:text-slate-500`}> Register Now!</span></Link>
             </form>
 
         </div>)
