@@ -14,3 +14,11 @@ export const authUrlSlug = {
     register: "/signup",
     resetPassword: "/resetPassword"
 }
+
+export const settingsSideBaUrlSlug = {
+    userProfile: `${sideNavUrlSlug.settings}`,
+    accountSetting: `${sideNavUrlSlug.settings}/accountSettings`,
+    chatSettings: `${sideNavUrlSlug.settings}/chatSettings`,
+    notificationSettings: `${sideNavUrlSlug.settings}/notificationSettings`,
+    appearanceSettings: `${sideNavUrlSlug.settings}/appearanceSettings`
+}
