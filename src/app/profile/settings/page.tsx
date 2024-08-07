@@ -1,7 +1,10 @@
+import Image from "next/image"
 
 const Settings = () => {
     return <>
-       User Profile 
+        <div className="">
+            Current User Profile
+        </div>
     </>
 }
 

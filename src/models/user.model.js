@@ -1,6 +1,4 @@
 import mongoose from "mongoose";
-
-
 const userSchema = new mongoose.Schema({
     userName: {
         type: String,
@@ -39,6 +37,7 @@ const userSchema = new mongoose.Schema({
     forgotPasswordTokenExpiry: Date,
     verifyToken: String,
     verifyTokenExpiry: Date,
+    cloudinaryProfileImageUrl: String,
 })
 
 

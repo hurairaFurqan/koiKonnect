@@ -12,7 +12,8 @@ export const sideNavUrlSlug = {
 export const authUrlSlug = {
     login : "/login",
     register: "/signup",
-    resetPassword: "/resetPassword"
+    resetPassword: "/resetPassword",
+    uploadProfileImage: "/uploadProfileImage"
 }
 
 export const settingsSideBaUrlSlug = {

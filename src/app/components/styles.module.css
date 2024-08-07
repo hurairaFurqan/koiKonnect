@@ -1,17 +1,17 @@
-.vl{
-    border-left: 2px solid black;
-    height: 30px;
+.vl {
+  border-left: 2px solid black;
+  height: 30px;
 }
 
 .searchForm {
   position: relative;
-  
-  
+
+
   width: 80%;
   height: 40px;
   border-radius: 40px;
   box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-  
+
   background: white;
   transition: all 0.3s ease;
 
@@ -28,7 +28,7 @@
   height: 20px;
   border: none;
   appearance: none;
-  outline: none;  
+  outline: none;
 }
 
 .searchButton {
@@ -41,13 +41,14 @@
   margin: 0;
   border: none;
   background: none;
-  outline: none!important;
+  outline: none !important;
   cursor: pointer;
 }
 
 
 /* Setting Search component*/
 /* Settings Side bar Navigation class */
-.svgColor{
+.svgColor {
   color: black;
 }
+

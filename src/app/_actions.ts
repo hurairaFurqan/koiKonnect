@@ -1,7 +1,7 @@
 "use server"
 
 import axios from "axios"
-import { loginSchema, signupSchema } from "../helpers/zodSchema"
+import { loginSchema, signupSchema, userProfileDetailsSchema } from "../helpers/zodSchema"
 import { BASIC_AUTH_URL } from "./constants/constants"
 import { revalidatePath } from "next/cache"
 import { cookies } from "next/headers"
@@ -79,3 +79,25 @@ export async function deleteToken() {
     cookies().delete("token");
 }
 
+export async function addUserUpdatedDetails(prevState: any, formData: FormData) {
+    const result = userProfileDetailsSchema.safeParse({
+        fName: formData.get("firstName"),
+        lName: formData.get("lastName"),
+        userType: formData.get("userType"),
+        userName: formData.get("userName"),
+        userBio: formData.get("userBio"),
+    })
+
+    if (!result.success) {
+        return { successMessage: "", errorMessage: result.error.issues[0].message };
+    }
+
+    const data = result.data;
+    // TODO: Send backend a request to update user data
+    try {
+
+    } catch (error: any) {
+        return { successMessage: "", errorMessage: error.response.data.error }
+    }
+
+}
