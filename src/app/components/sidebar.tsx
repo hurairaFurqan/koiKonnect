@@ -1,7 +1,7 @@
 "use client"
 
 import Image from "next/image"
-import React from "react"
+import React, { useEffect, useState } from "react"
 import KOILogo from "@/public/KOILogo.svg"
 import styles from './styles.module.css';
 import Link from "next/link";
@@ -14,15 +14,20 @@ import logoutIcon from "@/public/logoutIcon.svg";
 import { useRouter } from "next/navigation";
 import { deleteToken } from "../_actions";
 import { sideNavUrlSlug } from "../constants/constants";
+import axios from "axios";
 
 
 const SideBar = () => {
     const router = useRouter();
+    const [profileUrl, setProfileUrl] = useState("");
     const handleLogout = async () => {
         await deleteToken();
         router.push("/login");
 
     }
+
+    useEffect(() => {
+    },[])
     return <>
         <div className="p-5 flex flex-col  h-full">
             <div className="flex justify-center">

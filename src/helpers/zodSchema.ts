@@ -19,3 +19,12 @@ export const loginSchema = z.object({
     email : z.string().email({message: "Invalid Email Address"}),
     password: z.string()
 })
+
+
+export const userProfileDetailsSchema = z.object({
+    fName: z.string(),
+    lName: z.string(),
+    userName: z.string(),
+    bio: z.string(),
+    userType: z.string(),
+})

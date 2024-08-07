@@ -4,9 +4,9 @@
 import Image from "next/image"
 import React from "react"
 import Link from "next/link";
-import appearanceIcon from "@/public//appearanceIcon.svg"
-import commentIcon from "@/public//commentIcon.svg"
-import settingIcon from "@/public//settingsIcon.svg"
+import appearanceIcon from "@/public/appearanceIcon.svg"
+import commentIcon from "@/public/commentIcon.svg"
+import settingIcon from "@/public/settingsIcon.svg"
 import notificationIcon from "@/public/notificationIcon.svg"
 import profileIcon from "@/public/profileIcon.svg"
 import { settingsSideBaUrlSlug } from "../constants/constants";

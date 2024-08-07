@@ -12,12 +12,12 @@ export default function Layout({ children }: Readonly<{ children: React.ReactNod
                     <Image src={searchIcon} className="" alt="search Icon" width={22} height={22}></Image>
                 </div>
 
-                <div className="grid grid-cols-4 mt-6">
-                    <div className="">
+                <div className="h-full grid grid-cols-4 mt-6">
+                    <div className="h-fit">
                         <SettingsSideBar/>
                     </div>
-                    <div className="bg-blue-500 col-span-3 ml-5">
-                        <main className="">{children}</main>
+                    <div className="col-span-3 ml-5">
+                        <main className="h-full">{children}</main>
                     </div>
                 </div>
 
