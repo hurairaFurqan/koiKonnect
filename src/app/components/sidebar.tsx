@@ -14,12 +14,16 @@ import logoutIcon from "@/public/logoutIcon.svg";
 import { useRouter } from "next/navigation";
 import { deleteToken } from "../_actions";
 import { sideNavUrlSlug } from "../constants/constants";
-import axios from "axios";
 
 
-const SideBar = () => {
+interface UserImageUpdateProps {
+    profileUrl: string,
+}
+
+const SideBar: React.FC<UserImageUpdateProps> = (props: UserImageUpdateProps) => {
+
+    const { profileUrl } = props;
     const router = useRouter();
-    const [profileUrl, setProfileUrl] = useState("");
     const handleLogout = async () => {
         await deleteToken();
         router.push("/login");
@@ -27,14 +31,14 @@ const SideBar = () => {
     }
 
     useEffect(() => {
-    },[])
+    }, [])
     return <>
         <div className="p-5 flex flex-col  h-full">
             <div className="flex justify-center">
                 <Image src={KOILogo} alt="KOI LOGO"></Image>
             </div>
             <div className="mt-4 space-y-2 flex flex-col items-center">
-                <Image className="rounded-full w-24 h-24 border border-orange-500" src={profileIcon} alt="user profile avatar"></Image>
+                <Image className="rounded-full w-24 h-24 border border-orange-500" src={profileUrl || profileIcon} alt="user profile avatar" width={22} height={24} unoptimized></Image>
                 <div className="font-semibold">User First and Last Name</div>
                 <div className="orangeColor text-xs">@userName</div>
             </div>

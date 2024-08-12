@@ -97,3 +97,28 @@
 }
 
 
+.imageLabel{
+  background-color: #f7f6f6;
+  border: 1px solid #F36E39;
+  padding: .5rem;
+  cursor: pointer;
+  border-radius: 5px;
+  color: #5b5b5b;
+}
+
+
+.deleteButton {
+  background-color: #F36E39;
+  border-radius: 5px;
+  color: white;
+  padding: 10px;
+  
+  font-size: small;
+  height: 50%;
+}
+
+.deleteButton:hover {
+  background-color: transparent;
+  border: 1px solid #F36E39;
+  color: black;
+}
