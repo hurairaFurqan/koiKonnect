@@ -13,7 +13,9 @@ export const authUrlSlug = {
     login : "/login",
     register: "/signup",
     resetPassword: "/resetPassword",
-    uploadProfileImage: "/uploadProfileImage"
+    uploadProfileImage: "/uploadProfileImage",
+    getProfileImage: "/getProfileImage",
+    deleteProfileImage: "/deleteProfileImage"
 }
 
 export const settingsSideBaUrlSlug = {

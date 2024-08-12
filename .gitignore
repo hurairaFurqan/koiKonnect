@@ -7,6 +7,9 @@
 .yarn/install-state.gz
 .env
 
+# /public/uploads
+
+/.vscode
 # testing
 /coverage
 
