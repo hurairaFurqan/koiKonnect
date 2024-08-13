@@ -14,8 +14,10 @@ export const authUrlSlug = {
     register: "/signup",
     resetPassword: "/resetPassword",
     uploadProfileImage: "/uploadProfileImage",
-    getProfileImage: "/getProfileImage",
-    deleteProfileImage: "/deleteProfileImage"
+    // getProfileImage: "/getProfileImage", // Api route has been eliminated
+    deleteProfileImage: "/deleteProfileImage",
+    getMe: "/getMe",
+    updateUserDetails: "/updateUserDetails",
 }
 
 export const settingsSideBaUrlSlug = {

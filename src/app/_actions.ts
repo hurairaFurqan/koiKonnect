@@ -13,14 +13,20 @@ import path from "path"
 export const getDataFromToken = async () => {
     try {
         const token = cookies().get("token")?.value || "";
-
-        console.log("token:", token);
-
         const decodedToken: any = jwt.verify(token, process.env.TOKEN_SECRET!);
         return decodedToken.userId;
 
     } catch (error: any) {
         throw new Error(error.message);
+    }
+}
+
+export const getCookiesSessionToken = async () => {
+    try {
+        const token = cookies().get("token")?.value || "";
+        return token;
+    } catch (error: any) {
+        throw new Error(error.message)
     }
 }
 
@@ -98,7 +104,26 @@ export async function deleteToken() {
     cookies().delete("token");
 }
 
-export async function addUserUpdatedDetails(prevState: any, formData: FormData) {
+
+export async function userInfoRetrieval() {
+
+    try {
+        const userId = await getDataFromToken();
+
+        const res = await axios.post(`${BASIC_AUTH_URL}/${authUrlSlug.getMe}`, { userId });
+
+        return res.data.userData
+    } catch (error: any) {
+        console.log("in actions catch block", error);
+    }
+
+
+
+}
+
+export async function userUpdatedDetails(prevState: any, formData: FormData) {
+
+    const userId = await getDataFromToken();
     const result = userProfileDetailsSchema.safeParse({
         fName: formData.get("firstName"),
         lName: formData.get("lastName"),
@@ -112,8 +137,15 @@ export async function addUserUpdatedDetails(prevState: any, formData: FormData) 
     }
 
     const data = result.data;
+    const newData = { ...data, userId };
     // TODO: Send backend a request to update user data
     try {
+
+        const res = await axios.post(`${BASIC_AUTH_URL}/${authUrlSlug.updateUserDetails}`, newData);
+
+
+        return { successMessage: res.data.message, errorMessage: "" }
+
 
     } catch (error: any) {
         return { successMessage: "", errorMessage: error.response.data.error }
@@ -142,16 +174,20 @@ export async function userProfileImage(prevState: any, formData: FormData) {
         const relativePath = path.relative(uploadDir, filePath);
         const newPath = path.join("/", relativePath);
 
-        const token = cookies().get("token")?.value;
+        const userId = await getDataFromToken();
         console.log(filePath, "in server actions");
 
-        const res = await axios.post(`${BASIC_AUTH_URL}/${authUrlSlug.uploadProfileImage}`, { filePath: newPath, token });
-
-        console.log(res.data);
-
+        const res = await axios.post(`${BASIC_AUTH_URL}/${authUrlSlug.uploadProfileImage}`, { filePath: newPath, userId });
+        const previousProfileImageUrl = res.data.profileImageUrls.previousProfileImageUrl;
 
 
-        return { successMessage: res.data.profileUrl, errorMessage: "" }
+        if (previousProfileImageUrl) {
+            const response = deleteProfileImageFromLocalServer(previousProfileImageUrl)
+            console.log(response);
+            
+        }
+
+        return { successMessage: res.data.profileImageUrls.currentProfileImageUrl, errorMessage: "" }
     } catch (error: any) {
 
         console.log("in actions catch block");
@@ -161,37 +197,45 @@ export async function userProfileImage(prevState: any, formData: FormData) {
 }
 
 
-export async function userProfileImageRetrevial() {
-    try {
-        const token = cookies().get("token")?.value;
-        const res = await axios.post(`${BASIC_AUTH_URL}/${authUrlSlug.getProfileImage}`, { token });
-        // console.log(res.data.profileUrl, "in actions");
+// export async function userProfileImageRetrieval() {
+//     try {
+//         const token = cookies().get("token")?.value;
+//         const res = await axios.post(`${BASIC_AUTH_URL}/${authUrlSlug.getProfileImage}`, { token });
+//         // console.log(res.data.profileUrl, "in actions");
 
-        return res.data.profileUrl;
+//         return res.data.profileUrl;
 
-    } catch (error: any) {
+//     } catch (error: any) {
 
-        console.log("in actions catch block");
+//         console.log("in actions catch block");
 
-        return { successMessage: "", errorMessage: error.response }
-    }
-}
+//         return { successMessage: "", errorMessage: error.response }
+//     }
+// }
 
-
-export async function deleteProfileImage(profileUrl: string) {
+function deleteProfileImageFromLocalServer(profileUrl: string) {
     const filePath = path.join(process.cwd(), `/public${profileUrl}`);
     if (!filePath) {
         return "File not found"
     }
     try {
-
         // delete file from local folder
         fs.unlink(filePath, (err) => {
             if (err) {
-                console.log(err);
+                return err;
             }
-            console.log("removed successfully from uploads");
+            return "removed successfully from uploads"
         })
+    } catch (error: any) {
+        return error.response;
+    }
+}
+
+
+export async function deleteProfileImage(profileUrl: string) {
+    try {
+
+        const result = deleteProfileImageFromLocalServer(profileUrl);
         // remove URL from DB
         const userId = await getDataFromToken();
         const res = await axios.post(`${BASIC_AUTH_URL}/${authUrlSlug.deleteProfileImage}`, { userId })
