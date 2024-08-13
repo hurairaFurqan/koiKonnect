@@ -84,7 +84,7 @@ const AddForm = () => {
 
                 <div className={styles.selectContainer}>
                     <select className={styles.selectBox} name="userType" >
-                        <option value={""}>*Select User Type</option>
+                        <option value={""} selected disabled hidden>*Select User Type</option>
                         <option value={"student"}>Student</option>
                         <option value={"teacher"}>Teacher</option>
                         <option value={"graduate"}>Graduate</option>

@@ -1,4 +1,4 @@
-import { userProfileImageRetrevial } from "@/src/app/_actions";
+import { userInfoRetrieval } from "@/src/app/_actions";
 import UserImageUpdate from "./userImageChange";
 import UserProfileForm from "./userProfileForm";
 
@@ -6,14 +6,18 @@ import UserProfileForm from "./userProfileForm";
 
 
 export default async function AccountSetting() {
-    const profileUrl = await userProfileImageRetrevial();
+    const userInfo = await userInfoRetrieval();
 
-
+    const profileUrl = userInfo.localProfileImageUrl || "";
     return <>
-        <div className=" h-full">
+        <div className="h-full">
 
-            <UserImageUpdate profileUrl={profileUrl}></UserImageUpdate>
-            <UserProfileForm />
+            <div className=" h-1/4">
+                <UserImageUpdate profileUrl={profileUrl} />
+            </div>
+            <div className=" h-3/4">
+                <UserProfileForm {...userInfo} />
+            </div>
         </div>
     </>
 }

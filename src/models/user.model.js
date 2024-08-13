@@ -28,6 +28,11 @@ const userSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
+
+    userBio: {
+        type: String,
+        default: ""
+    },
     userType: {
         type: String,
         enum: ['student', 'teacher', 'graduate'],

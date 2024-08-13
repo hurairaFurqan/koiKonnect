@@ -7,18 +7,22 @@ import { NextRequest, NextResponse } from "next/server";
 connect();
 
 
-export async function GET(req: NextRequest) {
+export async function POST(req: NextRequest) {
     try {
-        const userId = await getDataFromToken(req);
-        const userData = await User.findOne({ _id: userId }).select("-password");
+        const { userId } = await req.json();
+        const userData = await User.findOne({ _id: userId }).select("_id");
         if (!userData) {
             return NextResponse.json({ message: "no user found against this id" }, { status: 400 });
         }
+        const filteredData = await User.findById(userId, {
+            "isVerified": 0,
+            "__v": 0,
+            "password": 0,
+            "email": 0,
 
-        return NextResponse.json({ success: true, userData: userData, message: "user found", }, { status: 200 });
-
-
-
+        });
+        
+        return NextResponse.json({ success: true, userData: filteredData, message: "user found", }, { status: 200 });
     } catch (error: any) {
         return NextResponse.json({ error: error.message }, { status: 500 });
     }

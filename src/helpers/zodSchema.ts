@@ -25,6 +25,6 @@ export const userProfileDetailsSchema = z.object({
     fName: z.string(),
     lName: z.string(),
     userName: z.string(),
-    bio: z.string(),
+    userBio: z.string(),
     userType: z.string(),
 })

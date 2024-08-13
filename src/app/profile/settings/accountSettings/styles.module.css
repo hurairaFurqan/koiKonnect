@@ -23,6 +23,7 @@
 .firstNameInput {
   border-radius: 5px;
   height: 2.5rem;
+  color: #5b5b5b;
   width: 15rem;
   border: 1px solid #E1E1E1;
   outline: none;
@@ -33,6 +34,7 @@
   border-radius: 5px;
   height: 2.5rem;
   width: 100%;
+  color: #5b5b5b;
   border: 1px solid #E1E1E1;
   outline: none;
   padding-left: .5rem;
@@ -51,6 +53,7 @@
   border-radius: 5px;
   outline: none;
   font-size: 16px;
+  color: #5b5b5b;
   background-color: white;
   background-position: 10px 10px;
   background-size: 2rem;
@@ -67,37 +70,37 @@
   border: 1px solid #E1E1E1;
   border-radius: 5px;
   outline: none;
+  color: #5b5b5b;
   font-size: 16px;
   padding: 10px;
 }
 
 .userBio {
   width: 100%;
-  height: 100px;
-  resize: none;
   box-sizing: border-box;
   border: 1px solid #E1E1E1;
   border-radius: 5px;
   outline: none;
+  font-style: italic;
+  color: #929090;
   font-size: 16px;
   padding: 10px;
 }
 
-.formSubmitButton{
+.formSubmitButton {
   background-color: #F36E39;
   border-radius: 5px;
   color: white;
   font-size: medium;
 }
 
-.formSubmitButton:hover{
+.formSubmitButton:hover {
   background-color: transparent;
   border: 1px solid #F36E39;
   color: black;
 }
 
-
-.imageLabel{
+.imageLabel {
   background-color: #f7f6f6;
   border: 1px solid #F36E39;
   padding: .5rem;
@@ -112,7 +115,7 @@
   border-radius: 5px;
   color: white;
   padding: 10px;
-  
+
   font-size: small;
   height: 50%;
 }
@@ -121,4 +124,33 @@
   background-color: transparent;
   border: 1px solid #F36E39;
   color: black;
+}
+
+
+/* Loader */
+.loader {
+  display: flex;
+  align-items: center;
+  width: fit-content;
+
+}
+
+.loader::after {
+  content: "";
+  width: 20px;
+  height: 20px;
+  border: 2px solid grey;
+  border-top-color: #F36E39;
+  border-radius: 50%;
+  animation: loading 0.75s ease infinite
+}
+
+@keyframes loading {
+  from {
+      transform: rotate(0turn)
+  }
+
+  to {
+      transform: rotate(1turn)
+  }
 }

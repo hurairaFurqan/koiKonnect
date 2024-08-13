@@ -12,27 +12,25 @@ interface JwtPayLoad {
 }
 
 export async function POST(req: NextRequest) {
-    const { filePath,token } = await req.json();
+    const { filePath, userId } = await req.json();
 
-    console.log(filePath, "filePath in ");
-    
-
-    
     try {
-      
-        const data =  jwt.verify(token, process.env.TOKEN_SECRET!) as JwtPayLoad
+
+
         
-        const dbUser = await User.findOneAndUpdate({ _id: data.userId },
+        const dbUserTemp = await User.findById(userId).select("localProfileImageUrl")
+        const dbUser = await User.findOneAndUpdate({ _id: userId },
             {
                 localProfileImageUrl: filePath
             },
             { new: true }
         ).select("localProfileImageUrl")
 
-
-        return NextResponse.json({ success: true, message: "image updated successfully", profileUrl: dbUser.localProfileImageUrl }, { status: 200 })
-
-
+        const profileImageUrls = {
+            previousProfileImageUrl: dbUserTemp.localProfileImageUrl,
+            currentProfileImageUrl: dbUser.localProfileImageUrl,
+        }
+        return NextResponse.json({ success: true, message: "image updated successfully", profileImageUrls }, { status: 200 })
     } catch (error: any) {
 
         console.log(error);
