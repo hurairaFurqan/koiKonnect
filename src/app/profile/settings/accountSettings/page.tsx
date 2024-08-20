@@ -8,7 +8,7 @@ import UserProfileForm from "./userProfileForm";
 export default async function AccountSetting() {
     const userInfo = await userInfoRetrieval();
 
-    const profileUrl = userInfo.localProfileImageUrl || "";
+    const profileUrl = userInfo?.localProfileImageUrl || "";
     return <>
         <div className="h-full">
 

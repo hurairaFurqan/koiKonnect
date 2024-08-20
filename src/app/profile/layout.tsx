@@ -8,7 +8,7 @@ export default async function Layout({ children }: Readonly<{ children: React.Re
 
 
     const userInfo = await userInfoRetrieval();
-    const profileUrl = userInfo.localProfileImageUrl || "";
+    const profileUrl = userInfo?.localProfileImageUrl || "";
     return (
         <>
             <div className="grid grid-cols-8 h-screen">

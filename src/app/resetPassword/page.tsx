@@ -1,7 +1,7 @@
 "use client"
 import Image from "next/image"
 import React, { FormEvent, useState } from "react"
-import keyIcon from "@/public/keyIcon.svg"
+import keyIcon from "@/public/icons/keyIcon.svg"
 import styles from "./styles.module.css"
 import axios from "axios"
 import { BASIC_AUTH_URL } from "../constants/constants"

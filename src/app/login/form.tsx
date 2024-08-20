@@ -52,7 +52,7 @@ const LoginForm = () => {
 
                 <div className="flex flex-col space-y-6 mt-10">
                     <div className={`${styles.inputGroup}`}>
-                        <input name="email" type="email" required ></input>
+                        <input name="email" type="email" required ></input> 
                         <label htmlFor="">*Email</label>
                     </div>
                     <div className={`${styles.inputGroup}`}>

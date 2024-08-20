@@ -1,5 +1,5 @@
 import Image from "next/image"
-import underDevelopment from "@/public/underDevelopmentIllustration.svg"
+import underDevelopment from "@/public/icons/underDevelopmentIllustration.svg"
 const ResumeEnhancer = () => {
     return <>
         <div className="flex justify-center align-center ">

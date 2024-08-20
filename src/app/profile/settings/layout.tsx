@@ -1,5 +1,5 @@
 import Image from "next/image"
-import searchIcon from "@/public/searchIcon.svg"
+import searchIcon from "@/public/icons/searchIcon.svg"
 import styles from "./styles.module.css"
 import SettingsSideBar from "../../components/settingsSideBar"
 export default function Layout({ children }: Readonly<{ children: React.ReactNode }>) {

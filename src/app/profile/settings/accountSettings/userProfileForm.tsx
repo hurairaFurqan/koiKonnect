@@ -86,9 +86,6 @@ const UserProfileForm: React.FC<userInfoProps> = (props: userInfoProps) => {
                         </div>
 
                         <SubmitButton />
-                        {/* <button className={`${styles.formSubmitButton} p-2 w-fit`} type="submit">
-                            Save Changes
-                        </button> */}
                     </div>
 
                 </div>

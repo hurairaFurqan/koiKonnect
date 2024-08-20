@@ -1,7 +1,7 @@
 "use client"
 
 import Image from "next/image"
-import errorIllustration from "@/public/errorIllustration.svg"
+import errorIllustration from "@/public/icons/errorIllustration.svg"
 
 type ErrorProps = {
     error: Error,

@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react"
-import searchIcon from "@/public/searchIcon.svg"
+import searchIcon from "@/public/icons/searchIcon.svg"
 import styles from "./styles.module.css"
 
 const HeaderSearch = () => {

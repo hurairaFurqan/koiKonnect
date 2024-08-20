@@ -1,11 +1,11 @@
 "use client"
 import Image from "next/image";
 import React, { useEffect, useState } from "react"
-import verifyEmail from "@/public/verifyEmail.svg";
-import verifyEmailSuccess from "@/public/verifyEmailSuccess.svg"
+import verifyEmail from "@/public/icons/verifyEmail.svg";
+import verifyEmailSuccess from "@/public/icons/verifyEmailSuccess.svg"
 import styles from "./styles.module.css"
 import axios from "axios";
-import { BASIC_AUTH_URL } from "@/src/app/constants/constants";
+import { BASIC_AUTH_URL_USERS } from "@/src/app/constants/constants";
 
 import { useRouter } from "next/navigation";
 import Link from "next/link";
@@ -59,7 +59,7 @@ const VerifyEmail = () => {
         try {
             // {token} vs token
             // check difference in both 
-            const res = await axios.post(`${BASIC_AUTH_URL}/verifyemail`, { token, emailType });
+            const res = await axios.post(`${BASIC_AUTH_URL_USERS}/verifyemail`, { token, emailType });
             const data = res.data;
             console.log(token);
 
@@ -91,7 +91,7 @@ const VerifyEmail = () => {
 
 
             try {
-                const res = await axios.post(`${BASIC_AUTH_URL}/verifyemail`, { token, emailType, password: pass.password });
+                const res = await axios.post(`${BASIC_AUTH_URL_USERS}/verifyemail`, { token, emailType, password: pass.password });
                 console.log(res.data);
                 setSuccessMessage(res.data.message)
                 setError("")

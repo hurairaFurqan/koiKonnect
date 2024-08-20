@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React from "react";
-import SignupVector from '@/public/SignupVector.svg';
+import SignupVector from '@/public/icons/SignupVector.svg';
 
 import AddForm from "./addfrom";
 

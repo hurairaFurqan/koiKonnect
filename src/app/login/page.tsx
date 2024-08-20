@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import React, { useState } from 'react'
-import Intersect from "@/public/Intersect.png"
+import Intersect from "@/public/icons/Intersect.png"
 import LoginForm from "./form";
 
 const login = () => {

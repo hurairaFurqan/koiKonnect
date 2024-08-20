@@ -1,7 +1,20 @@
-import mongoose from  'mongoose';
+
+import mongoose from 'mongoose';
+
 const postSchema = mongoose.Schema({
-    postCaption : String,
-    location : String,
+    postCaption: String,
+    location: String,
     imageURL: String,
-    commentPermission: Boolean
-})
+    commentPermission: Boolean,
+    privacyPermission: Boolean,
+    userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Users",
+    }
+},
+    { timestamps: true }
+)
+
+const Post = mongoose.model.Posts || mongoose.model("Posts", postSchema);
+
+export default Post;
