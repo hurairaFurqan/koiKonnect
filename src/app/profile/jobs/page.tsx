@@ -1,5 +1,5 @@
 import Image from "next/image";
-import jobsNotAvailable from "@/public/jobsNotAvailableIllustration.svg"
+import jobsNotAvailable from "@/public/icons/jobsNotAvailableIllustration.svg"
 export default function Jobs() {
     return <>
         <div className="flex justify-center align-center ">
@@ -8,4 +8,3 @@ export default function Jobs() {
         </div>
     </>
 }
-

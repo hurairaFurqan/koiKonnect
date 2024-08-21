@@ -1,13 +1,13 @@
 "use client"
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import KOILogo from '@/public/KOILogo.svg'
-import googleButton from "@/public/googleButtonRegular.svg"
+import KOILogo from '@/public/icons/KOILogo.svg'
+import googleButton from "@/public/icons/googleButtonRegular.svg"
 import styles from "./styles.module.css";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useFormState, useFormStatus } from "react-dom";
-import { addEntry } from "../_actions";
+import { signUpEntry } from "../_actions";
 
 // TODO : redirecting user to login
 
@@ -30,7 +30,7 @@ const initialState = {
 }
 
 const AddForm = () => {
-    const [state, setState] = useFormState(addEntry, initialState);
+    const [state, setState] = useFormState(signUpEntry, initialState);
 
     const router = useRouter();
 

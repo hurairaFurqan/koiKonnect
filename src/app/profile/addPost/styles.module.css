@@ -1,0 +1,113 @@
+.imageUploadButton {
+    background-color: #F36E39;
+    border-radius: 5px;
+    padding: 6px;
+    color: white;
+    font-size: small;
+}
+
+.imageUploadButton:hover {
+    background-color: transparent;
+    border: 1px solid #F36E39;
+    color: #5E5E5E;
+}
+
+.footerInfoBar {
+
+    background-color: "#F2F2F2";
+    box-shadow: inset 1px 1px 3px #acacac;
+}
+
+.iconDiv {
+    position: absolute;
+    background-color: white;
+    border-radius: 50%;
+    color: black;
+    margin-top: 4px;
+    margin-right: 4px;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 2;
+    right: 0;
+}
+
+.Image {
+    position: relative;
+    z-index: 1;
+}
+
+.textarea {
+    width: 100%;
+    height: 100px;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    color: #5b5b5b;
+    font-size: small;
+    letter-spacing: 1px;
+    background-color: white;
+    font-size: 16px;
+    border-radius: 10px;
+    outline: none;
+    border: none;
+    resize: none;
+}
+
+
+.locationInput {
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 5px;
+    outline: none;
+    letter-spacing: 1px;
+    font-size: 16px;
+    color: #5b5b5b;
+    background-color: white;
+    background-position: right 1em bottom 10px;
+    background-size: 1.2rem;
+    background-image: url('../../../../public//icons/locationIcon.svg');
+    object-fit: cover;
+    background-repeat: no-repeat;
+    padding: 12px 0px 12px 20px;
+}
+
+.label {
+    font-size: small;
+    color: #5E5E5E;
+}
+
+
+.postButton {
+    background-color: #F36E39;
+    padding: 10px;
+    width: 8rem;
+    border-radius: 10px;
+    color: white;
+}
+.postButton:hover{
+    background-color: transparent;
+    border: 1px solid #F36E39;
+    border-radius: 10px;
+    color: black;
+
+}
+
+.discardButton{
+    
+    padding: 10px;
+    width: 8rem;
+}
+
+.discardButton:hover{
+    background-color: #5b5b5b;
+    border-radius: 10px;
+    padding: 10px;
+    width: 8rem;
+    color: white;
+}

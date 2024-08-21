@@ -2,15 +2,15 @@
 
 import Image from "next/image"
 import React, { useEffect, useState } from "react"
-import KOILogo from "@/public/KOILogo.svg"
+import KOILogo from "@/public/icons/KOILogo.svg"
 import styles from './styles.module.css';
 import Link from "next/link";
-import homeIcon from "@/public/homeIcon.svg";
-import addIcon from "@/public/addIcon.svg";
-import resumeEnhancerIcon from "@/public/resumeEnhancerIcon.svg";
-import jobsIcon from "@/public/jobsIcon.svg";
-import profileIcon from "@/public/profileIcon.svg"
-import logoutIcon from "@/public/logoutIcon.svg";
+import homeIcon from "@/public/icons/homeIcon.svg";
+import addIcon from "@/public/icons/addIcon.svg";
+import resumeEnhancerIcon from "@/public/icons/resumeEnhancerIcon.svg";
+import jobsIcon from "@/public/icons/jobsIcon.svg";
+import profileIcon from "@/public/icons/profileIcon.svg"
+import logoutIcon from "@/public/icons/logoutIcon.svg";
 import { useRouter } from "next/navigation";
 import { deleteToken } from "../_actions";
 import { sideNavUrlSlug } from "../constants/constants";

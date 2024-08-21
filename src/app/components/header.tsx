@@ -1,6 +1,6 @@
 import HeaderSearch from "./headerSearch";
-import inboxIcon from "@/public/inboxIcon.svg"
-import notificationIcon from "@/public/notificationIcon.svg"
+import inboxIcon from "@/public/icons/inboxIcon.svg"
+import notificationIcon from "@/public/icons/notificationIcon.svg"
 import Image from "next/image";
 const Header = () => {
     return <>

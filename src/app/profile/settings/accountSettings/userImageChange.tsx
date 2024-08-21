@@ -1,13 +1,11 @@
 "use client"
 import Image from "next/image"
-import profileIcon from "@/public/profileIcon.svg"
+import profileIcon from "@/public/icons/profileIcon.svg"
 import styles from "./styles.module.css"
-import React, { useEffect, useState } from "react"
-import axios from "axios"
-import { authUrlSlug, BASIC_AUTH_URL } from "@/src/app/constants/constants"
+import React from "react"
 import { useFormState } from "react-dom"
 import { userProfileImage, deleteProfileImage } from "@/src/app/_actions"
-import { NextPage } from "next"
+
 
 const initialState = {
     successMessage: "",
@@ -24,29 +22,6 @@ const UserImageUpdate: React.FC<UserImageUpdateProps> = (props: UserImageUpdateP
     const [file, setFile] = useFormState(userProfileImage, initialState);
 
     const { profileUrl } = props;
-
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        // if (!file) {
-        //     return;
-        // }
-        // try {
-        //     const data = new FormData();
-        //     data.set("file", file);
-        //     const res = await axios.post(`${BASIC_AUTH_URL}/${authUrlSlug.uploadProfileImage}`, data);
-
-        //     console.log(res.data);
-
-
-        //     setProfileUrl(res.data.profileUrl)
-
-
-
-        // } catch (error: any) {
-        //     console.log(error.response.message);
-
-        // }
-    }
 
     const handleDelete = () => {
         deleteProfileImage(profileUrl);
@@ -65,10 +40,10 @@ const UserImageUpdate: React.FC<UserImageUpdateProps> = (props: UserImageUpdateP
 
                 <div>{file.errorMessage || ""}</div>
 
-                <form action={setFile} className="flex items-center place-content-around     mt-2 w-3/5 ml-12">
+                <form action={setFile} className="flex items-center place-content-around mt-2 w-3/5 ml-12">
 
 
-                    <label htmlFor="file-upload" className={styles.imageLabel}>Choose Picture from local device</label>
+                    <label htmlFor="file-upload" className={styles.imageLabel}>Browse your computer</label>
                     <input className={styles.fileUpload} id="file-upload" accept=".png, .jpg, .jpeg" type="file"
                         name="profileImage" ></input>
 

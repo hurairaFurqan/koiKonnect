@@ -38,14 +38,28 @@ const userSchema = new mongoose.Schema({
         enum: ['student', 'teacher', 'graduate'],
         default: 'student'
     },
+
+    posts: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Posts"
+    }],
+     
     forgotPasswordToken: String,
     forgotPasswordTokenExpiry: Date,
     verifyToken: String,
     verifyTokenExpiry: Date,
     localProfileImageUrl: String,
-})
+}, { timestamps: true });
 
+// userSchema.virtual('posts', {
+//     ref: "posts",
+//     localField: "_id",
+//     foreignField: "users"
+// });
 
-const User = mongoose.models.users || mongoose.model("users", userSchema);
+// userSchema.set('toObject', { virtuals: true });
+// userSchema.set('toJSON', { virtuals: true });
+
+const User = mongoose.models.Users || mongoose.model("Users", userSchema);
 
 export default User;

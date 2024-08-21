@@ -1,5 +1,7 @@
 
-export const BASIC_AUTH_URL = "http://localhost:3000/api/users"
+export const BASIC_AUTH_URL_USERS = "http://localhost:3000/api/users"
+export const BASIC_AUTH_URL_POSTS = "http://localhost:3000/api/posts"
+
 
 export const sideNavUrlSlug = {
     feed: "/profile",
@@ -18,6 +20,12 @@ export const authUrlSlug = {
     deleteProfileImage: "/deleteProfileImage",
     getMe: "/getMe",
     updateUserDetails: "/updateUserDetails",
+}
+
+
+export const addPostSlug = {
+    // saveImage : "/saveImage"
+    newPost: "/newPost",
 }
 
 export const settingsSideBaUrlSlug = {
