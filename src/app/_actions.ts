@@ -210,6 +210,7 @@ export async function userProfileImage(prevState: any, formData: FormData) {
             console.log(response);
 
         }
+        revalidatePath("/")
 
         return { successMessage: res.data.profileImageUrls.currentProfileImageUrl, errorMessage: "" }
     } catch (error: any) {
@@ -263,6 +264,7 @@ export async function deleteProfileImage(profileUrl: string) {
         const userId = await getDataFromToken();
         const res = await axios.post(`${BASIC_AUTH_URL_USERS}/${authUrlSlug.deleteProfileImage}`, { userId })
         console.log("response against API CALL", res.data);
+        revalidatePath("/")
     } catch (error: any) {
         console.log("in actions catch block");
 
@@ -273,17 +275,52 @@ export async function deleteProfileImage(profileUrl: string) {
 
 }
 
-export async function addPostImage(formData: FormData) {
-    try {
-        const file = formData.get("addPostImage") as File;
+// export async function addPostImage(formData: FormData) {
+//     try {
+//         const file = formData.get("addPostImage") as File;
 
+
+
+//         const buffer: Uint8Array = await createBuffer(file);
+
+//         // const arrayBuffer = await file.arrayBuffer();
+//         // const buffer = new Uint8Array(arrayBuffer);
+//         const uploadDir = path.join(process.cwd(), "public");
+//         const filePath = path.join("public/posts/", file.name);
+
+//         await writeFile(filePath, buffer);
+
+//         const relativePath = path.relative(uploadDir, filePath);
+//         const newPath = path.join("/", relativePath);
+
+//         const userId = await getDataFromToken();
+//         const res = await axios.post(`${BASIC_AUTH_URL_POSTS}${addPostSlug.saveImage}`, { newPath, userId });
+
+
+
+//         console.log(res.data.savedPost._id, "in server actions");
+//         cookies().set("postId", res.data.savedPost._id);
+
+
+//         console.log(res.data.message);
+
+
+//         return res.data.message;
+
+//     } catch (error: any) {
+//         return error.response
+//     }
+// }
+
+
+export async function addPost(state: FormData) {
+    try {
+        const file = state.get("addPostImage") as File;
 
 
         const buffer: Uint8Array = await createBuffer(file);
 
-        // const arrayBuffer = await file.arrayBuffer();
-        // const buffer = new Uint8Array(arrayBuffer);
-        const uploadDir = path.join(process.cwd(), "public");
+        const uploadDir = path.join(process.cwd(), 'public');
         const filePath = path.join("public/posts/", file.name);
 
         await writeFile(filePath, buffer);
@@ -292,41 +329,26 @@ export async function addPostImage(formData: FormData) {
         const newPath = path.join("/", relativePath);
 
         const userId = await getDataFromToken();
-        const res = await axios.post(`${BASIC_AUTH_URL_POSTS}${addPostSlug.saveImage}`, { newPath, userId });
 
 
 
-        console.log(res.data.savedPost._id, "in server actions");
-        cookies().set("postId", res.data.savedPost._id);
+        const commentPermission = state.get("commentPermission");
+        const privacyPermission = state.get("privacyPermission");
+        const caption = state.get("caption") as string;
+        const location = state.get("location") as string;
+        const obj = {
+            newPath, userId, commentPermission, privacyPermission, caption, location
+        };
 
 
-        console.log(res.data.message);
+        const res = await axios.post(`${BASIC_AUTH_URL_POSTS}${addPostSlug.newPost}`, obj);
 
+        console.log("in sever actions", res.data);
 
         return res.data.message;
 
     } catch (error: any) {
-        return error.response
+        console.log(error.response);
+
     }
-}
-
-
-
-export async function addPostForm(formData: FormData) {
-
-    try {
-
-        const file = formData.get("file") as File
-        return { successMessage: file.name, errorMessage: "" };
-
-    } catch (error: any) {
-
-        return { successMessage: "", errorMessage: "" };
-    }
-}
-
-export async function addPost(state: object){
-    console.log(state);
-
-    
 }

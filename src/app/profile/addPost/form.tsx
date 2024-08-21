@@ -13,16 +13,28 @@ const createImagePreview = (file: File) => {
 }
 
 
+
+type FormState = {
+    addPostImage: File | null,
+    commentPermission: boolean,
+    privacyPermission: boolean,
+    caption: string,
+    location: string
+}
+
 const AddPostForm = () => {
 
 
-    const [state, setState] = useState({
-        addPostImage: File,
+    const [state, setState] = useState<FormState>({
+        addPostImage: null,
         commentPermission: false,
         privacyPermission: false,
         caption: "",
         location: "",
     })
+
+
+    const [response, setResponse] = useState("");
 
 
     // caption
@@ -155,13 +167,29 @@ const AddPostForm = () => {
 
 
     const handlePostForm = async () => {
-        console.log(file);
+
+        const formData = new FormData();
+        for (const key in state) {
+            const value = state[key as keyof FormState];
+            if (value instanceof File || typeof value === "string" || typeof value === "boolean") {
+                formData.append(key, value as Blob | string);
+            }
+
+        }
+
+        const res = await addPost(formData)
+
+        if (typeof res === "string") {
+            setResponse(res);
+            handleDiscardForm();
+        }
+
     }
 
     const handleDiscardForm = () => {
 
         setState({
-            addPostImage: File,
+            addPostImage: null,
             commentPermission: false,
             privacyPermission: false,
             caption: "",
@@ -173,6 +201,7 @@ const AddPostForm = () => {
     return (<>
 
         <div className="h-full">
+            <p className="flex justify-center text-green-700">{response}</p>
             <form className="h-full"
                 onDragEnter={(e) => handleDragEnter(e)}
                 onDrop={(e) => handleDrop(e)}

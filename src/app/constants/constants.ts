@@ -24,7 +24,8 @@ export const authUrlSlug = {
 
 
 export const addPostSlug = {
-    saveImage : "/saveImage"
+    // saveImage : "/saveImage"
+    newPost: "/newPost",
 }
 
 export const settingsSideBaUrlSlug = {
