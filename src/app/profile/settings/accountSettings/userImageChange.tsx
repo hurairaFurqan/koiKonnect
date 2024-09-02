@@ -4,7 +4,7 @@ import profileIcon from "@/public/icons/profileIcon.svg"
 import styles from "./styles.module.css"
 import React from "react"
 import { useFormState } from "react-dom"
-import { userProfileImage, deleteProfileImage } from "@/src/app/_actions"
+import { userProfileImage, deleteProfileImage } from "@/src/app/actions/_actions"
 
 
 const initialState = {

@@ -4,7 +4,7 @@ import React, { FormEvent, useState } from "react"
 import keyIcon from "@/public/icons/keyIcon.svg"
 import styles from "./styles.module.css"
 import axios from "axios"
-import { BASIC_AUTH_URL } from "../constants/constants"
+import { BASIC_AUTH_URL_USERS } from "../constants/constants"
 
 const ResetPassword = () => {
 
@@ -19,7 +19,7 @@ const ResetPassword = () => {
         //
 
         try {
-            const res = await axios.post(`${BASIC_AUTH_URL}/resetPassword`, { email });
+            const res = await axios.post(`${BASIC_AUTH_URL_USERS}/resetPassword`, { email });
 
             setSuccess(res.data.message)
             setError("")

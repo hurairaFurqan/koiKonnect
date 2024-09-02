@@ -12,7 +12,7 @@ import jobsIcon from "@/public/icons/jobsIcon.svg";
 import profileIcon from "@/public/icons/profileIcon.svg"
 import logoutIcon from "@/public/icons/logoutIcon.svg";
 import { useRouter } from "next/navigation";
-import { deleteToken } from "../_actions";
+import { deleteToken } from "../actions/_actions";
 import { sideNavUrlSlug } from "../constants/constants";
 
 

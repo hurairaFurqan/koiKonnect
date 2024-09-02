@@ -1,7 +1,7 @@
 "use client"
 import { useFormState, useFormStatus } from "react-dom"
 import styles from "./styles.module.css"
-import { userUpdatedDetails } from "@/src/app/_actions"
+import { userUpdatedDetails } from "@/src/app/actions/_actions"
 import React from "react"
 
 const initialState = {
@@ -36,6 +36,7 @@ function SubmitButton() {
 const UserProfileForm: React.FC<userInfoProps> = (props: userInfoProps) => {
 
     const { userName, fName, lName, userType, userBio } = props;
+    
     const [state, setState] = useFormState(userUpdatedDetails, initialState)
     return <>
         <div className="mt-4 ml-6 h-full">
@@ -66,9 +67,9 @@ const UserProfileForm: React.FC<userInfoProps> = (props: userInfoProps) => {
                             Status
                         </label>
                         <select className={styles.userStatus} name="userType" defaultValue={userType}>
-                            <option value={"student"}>Student</option>
-                            <option value={"teacher"}>Teacher</option>
-                            <option value={"graduate"}>Graduate</option>
+                            <option value={"Student"}>Student</option>
+                            <option value={"Teacher"}>Teacher</option>
+                            <option value={"Graduate"}>Graduate</option>
                         </select>
                     </div>
 

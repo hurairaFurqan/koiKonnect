@@ -7,9 +7,6 @@ import jwt from "jsonwebtoken"
 import User from "@/src/models/user.model";
 
 connect();
-interface JwtPayLoad {
-    userId: string
-}
 
 export async function POST(req: NextRequest) {
     const { filePath, userId } = await req.json();

@@ -1,10 +1,9 @@
 import { connect } from "@/src/dbConfig/dbConfig";
 import { NextRequest, NextResponse } from "next/server";
-// import Post from "@/src/models/posts.model";
-var Post = mongoose.model("Posts");
-// import User from "@/src/models/user.model";
-var User = mongoose.model("Users");
-import mongoose from "mongoose";
+import Post from "@/src/models/posts.model";
+// var Post = mongoose.model("Posts") ;
+import User from "@/src/models/user.model";
+// var User = mongoose.model("Users");
 
 
 connect();
@@ -21,7 +20,7 @@ export async function POST(req: NextRequest) {
             imageURL: newPath,
             commentPermission: commentPermission,
             privacyPermission: privacyPermission,
-            userId: userId,
+            userId: userId, 
         })
 
 
@@ -38,7 +37,6 @@ export async function POST(req: NextRequest) {
 
     } catch (error: any) {
         return NextResponse.json({ error: error.message }, { status: 500 });
-
 
     }
 

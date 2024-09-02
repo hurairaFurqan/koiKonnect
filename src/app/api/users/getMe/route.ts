@@ -21,7 +21,7 @@ export async function POST(req: NextRequest) {
             "email": 0,
 
         });
-        
+
         return NextResponse.json({ success: true, userData: filteredData, message: "user found", }, { status: 200 });
     } catch (error: any) {
         return NextResponse.json({ error: error.message }, { status: 500 });

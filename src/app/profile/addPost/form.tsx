@@ -5,7 +5,7 @@ import Image from "next/image";
 import styles from "./styles.module.css"
 import uplaodIcon from "@/public/icons/uploadIcon.svg"
 import axios from "axios";
-import { addPost } from "../../_actions";
+import { addPost } from "@/src/app/actions/_actions";
 
 const createImagePreview = (file: File) => {
     const imageUrl = window.URL.createObjectURL(file);

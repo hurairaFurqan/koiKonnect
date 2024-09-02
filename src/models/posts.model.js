@@ -10,11 +10,19 @@ const postSchema = mongoose.Schema({
     userId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Users",
-    }
+    },
+
+    likesCount: Number,
+    likes: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Users"
+        }
+    ]
 },
     { timestamps: true }
 )
 
-const Post = mongoose.model.Posts || mongoose.model("Posts", postSchema);
+const Post = mongoose.models.Posts || mongoose.model("Posts", postSchema);
 
 export default Post;

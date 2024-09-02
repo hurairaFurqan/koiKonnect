@@ -7,7 +7,11 @@
 .yarn/install-state.gz
 .env
 
-# /public/uploads
+/public/uploads
+/public/coverPhoto
+/public/icons
+/public/posts
+
 
 /.vscode
 # testing

@@ -4,7 +4,7 @@ import styles from "./styles.module.css"
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useFormState, useFormStatus } from "react-dom";
-import { loginEntry } from "../_actions";
+import { loginEntry } from "../actions/_actions";
 import { authUrlSlug, sideNavUrlSlug } from "../constants/constants";
 
 

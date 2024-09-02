@@ -1,4 +1,4 @@
-import { userInfoRetrieval } from "@/src/app/_actions";
+import { userInfoRetrieval } from "@/src/app/actions/_actions";
 import UserImageUpdate from "./userImageChange";
 import UserProfileForm from "./userProfileForm";
 
