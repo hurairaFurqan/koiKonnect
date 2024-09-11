@@ -4,7 +4,7 @@ import React, { useRef, useState } from "react"
 import uplaodIcon from "@/public/icons/uploadIcon.svg"
 import Image from "next/image";
 
-import { accessibilityControls, addPostImage } from "../../_actions";
+import { accessibilityControls } from "@/src/app/actions/_actions";
 import styles from "./styles.module.css"
 
 
@@ -52,9 +52,9 @@ const ImageDnd = () => {
             const formData = new FormData();
             formData.append("addPostImage", file);
 
-            const res = await addPostImage(formData)
-            console.log(res);
-            setResponseData(res);
+            // const res = await addPostImage(formData)
+            // console.log(res);
+            // setResponseData(res);
 
             setFlag(false);
         }

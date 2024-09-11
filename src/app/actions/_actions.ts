@@ -1,8 +1,8 @@
 "use server"
 
 import axios from "axios"
-import { loginSchema, signupSchema, userProfileDetailsSchema } from "../helpers/zodSchema"
-import { authUrlSlug, BASIC_AUTH_URL_USERS, BASIC_AUTH_URL_POSTS, addPostSlug } from "./constants/constants"
+import { loginSchema, signupSchema, userProfileDetailsSchema } from "@/src/helpers/zodSchema"
+import { authUrlSlug, BASIC_AUTH_URL_USERS, BASIC_AUTH_URL_POSTS, postSlug, currentUser } from "@/src/app/constants/constants"
 import { revalidatePath } from "next/cache"
 import { cookies } from "next/headers"
 import { writeFile } from "fs/promises"
@@ -341,7 +341,7 @@ export async function addPost(state: FormData) {
         };
 
 
-        const res = await axios.post(`${BASIC_AUTH_URL_POSTS}${addPostSlug.newPost}`, obj);
+        const res = await axios.post(`${BASIC_AUTH_URL_POSTS}${postSlug.newPost}`, obj);
 
         console.log("in sever actions", res.data);
 
@@ -350,5 +350,39 @@ export async function addPost(state: FormData) {
     } catch (error: any) {
         console.log(error.response);
 
+    }
+}
+
+
+export async function uplaodCoverPhotoCurrentUser(formData: FormData) {
+    try {
+
+
+        const file = formData.get("file") as File;
+        
+        const buffer : Uint8Array = await createBuffer(file);
+    
+        const uploadDir = path.join(process.cwd(), "public");
+    
+        const filePath =  path.join("public/coverPhoto/", file.name);
+    
+        await writeFile(filePath, buffer);
+        const relativePath = path.relative(uploadDir, filePath);
+    
+        const newPath = path.join("/", relativePath);
+    
+        const userId = await getDataFromToken();
+    
+        const res = await axios.post(`${BASIC_AUTH_URL_USERS}${currentUser.uploadCoverPhoto}`, {newPath, userId});
+        const previousCoverPhotoUrl  = res.data.coverPhotoUrls.previousCoverPhotoUrl;
+
+        if (previousCoverPhotoUrl) {
+            const response = deleteProfileImageFromLocalServer(previousCoverPhotoUrl)
+            console.log(response);
+
+        }
+        console.log(res.data);
+    } catch (error: any) {
+        console.log(error.response);
     }
 }

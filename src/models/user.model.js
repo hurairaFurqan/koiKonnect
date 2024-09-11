@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+
 const userSchema = new mongoose.Schema({
     userName: {
         type: String,
@@ -35,14 +36,18 @@ const userSchema = new mongoose.Schema({
     },
     userType: {
         type: String,
-        enum: ['student', 'teacher', 'graduate'],
-        default: 'student'
+        enum: ['Student', 'Teacher', 'Graduate'],
+        default: 'Student'
     },
 
     posts: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "Posts"
     }],
+    coverPhoto: {
+        type: String,
+        required: false,
+    },
      
     forgotPasswordToken: String,
     forgotPasswordTokenExpiry: Date,

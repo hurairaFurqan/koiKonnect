@@ -2,7 +2,7 @@ import React from "react";
 import SideBar from "../components/sidebar";
 import Header from "../components/header";
 import styles from "./styles.module.css"
-import { userInfoRetrieval } from "../_actions";
+import { userInfoRetrieval } from "@/src/app/actions/_actions";
 
 export default async function Layout({ children }: Readonly<{ children: React.ReactNode }>) {
 

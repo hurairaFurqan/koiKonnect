@@ -7,7 +7,7 @@ import styles from "./styles.module.css";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useFormState, useFormStatus } from "react-dom";
-import { signUpEntry } from "../_actions";
+import { signUpEntry } from "@/src/app/actions/_actions";
 
 // TODO : redirecting user to login
 
@@ -85,9 +85,9 @@ const AddForm = () => {
                 <div className={styles.selectContainer}>
                     <select className={styles.selectBox} name="userType" >
                         <option value={""} selected disabled hidden>*Select User Type</option>
-                        <option value={"student"}>Student</option>
-                        <option value={"teacher"}>Teacher</option>
-                        <option value={"graduate"}>Graduate</option>
+                        <option value={"Student"}>Student</option>
+                        <option value={"Teacher"}>Teacher</option>
+                        <option value={"Graduate"}>Graduate</option>
                     </select>
                 </div>
                 <div className={styles.inputGroup}>

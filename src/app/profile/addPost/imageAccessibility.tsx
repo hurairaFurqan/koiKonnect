@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useState } from "react"
-import { accessibilityControls } from "../../_actions"
+import { accessibilityControls } from "@/src/app/actions/_actions"
 
 
 interface ToggleSwitch {

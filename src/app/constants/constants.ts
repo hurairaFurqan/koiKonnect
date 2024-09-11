@@ -23,9 +23,18 @@ export const authUrlSlug = {
 }
 
 
-export const addPostSlug = {
+export const currentUser = {
+    uploadCoverPhoto : "/uploadCoverPhoto",
+    getCurrentUser: "/getCurrentUser",
+}
+
+
+export const postSlug = {
     // saveImage : "/saveImage"
     newPost: "/newPost",
+    getPost: "/getPost",
+    postLikeStatus: "/postLikeStatus",
+    postComment : "/postComment",
 }
 
 export const settingsSideBaUrlSlug = {
