@@ -23,7 +23,7 @@ export async function userRetrieval() {
 export async function postRetrieval(postId: string) {
     try {
         const res = await axios.post(`${BASIC_AUTH_URL_POSTS}${postSlug.getPost}`, { postId });
-        // console.log(res.data.post);
+
         return res.data.post
     } catch (error: any) {
         console.log(error.response);

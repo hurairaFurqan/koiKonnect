@@ -28,3 +28,9 @@ export const userProfileDetailsSchema = z.object({
     userBio: z.string(),
     userType: z.string(),
 })
+
+
+
+export const commentSchema = z.object({
+    commentContent: z.string()
+})

@@ -33,6 +33,8 @@ export const postSlug = {
     // saveImage : "/saveImage"
     newPost: "/newPost",
     getPost: "/getPost",
+    postLikeStatus: "/postLikeStatus",
+    postComment : "/postComment",
 }
 
 export const settingsSideBaUrlSlug = {

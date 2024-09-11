@@ -14,31 +14,63 @@ import commentIcon from "@/public/icons/commentIcon.svg"
 import shareIcon from "@/public/icons/shareIcon.svg"
 
 import { useParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import CommentSection from "./commentSection";
-
+import { commentUpload, postLike } from "@/src/app/actions/postActions";
 
 const PostContent = () => {
+
+    const [comment, setComment] = useState("");
     const params = useParams();
+    const postId: string = params.postId as string;
     const [postData, setPostData] = useState({
         imageURL: "",
-        commentPermission: false
+        commentPermission: false,
+        likesCount: 0,
     });
 
     const [userData, setUserData] = useState({
         localProfileImageUrl: "",
         userName: "",
+
     });
+    const [liked, setLiked] = useState(false);
+
+    const [commentArray, setCommentArray] = useState([]);
+
+    const handleLikeStatus = async (e: React.ChangeEvent<HTMLInputElement>) => {
+
+        const { checked } = e.target;
+
+        const res = await postLike(postId, checked);
+
+        setLiked(res);
+
+    }
+
+
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        if (comment && postId) {
+            await commentUpload(comment, postId)
+            setComment("");
+        }
+    }
 
     useEffect(() => {
 
 
         const fetchData = async () => {
-            const postId: string = params.postId as string;
             if (postId) {
                 const data = await postRetrieval(postId);
+                const post = data?.post;
+                const liked = data?.liked;
+
+
+                setCommentArray(data?.post?.comments);
                 const userInfo = await userInfoRetrieval();
-                setPostData(data);
+                setPostData(post);
+                setLiked(liked);
                 setUserData(userInfo);
 
             }
@@ -53,15 +85,16 @@ const PostContent = () => {
     }, [])
     return <>
         <div className="h-full grid grid-cols-3">
-            <div className="col-span-2 bg-green-500">
-                <Image src={postData.imageURL} alt="Post Image" width={0} height={0} sizes="100vw" style={{ width: '100%', height: '100%' }}></Image>
+            <div className="col-span-2 ">
+                <Image src={postData?.imageURL || profileIcon} alt="Post Image" width={0} height={0}
+                    sizes="100vw" style={{ width: '100%', height: '100%' }}></Image>
             </div>
-            <div className="col-span-1">
+            <div className="col-span-1 ">
                 <div className="flex items-center p-2">
                     <Image className="rounded-full w-10 h-10  border border-orange-500 object-cover"
-                        src={userData.localProfileImageUrl || profileIcon} alt="user profile avatar"
+                        src={userData?.localProfileImageUrl || profileIcon} alt="user profile avatar"
                         width={10} height={12} unoptimized></Image>
-                    <p className="text-sm ml-4">{userData.userName || ""}</p>
+                    <p className="text-sm ml-4">{userData?.userName || ""}</p>
                     <div className="w-full flex justify-end">
                         <Image src={menuIcon} alt="menu icon"></Image>
                     </div>
@@ -69,14 +102,26 @@ const PostContent = () => {
 
                 <hr></hr>
 
-                <div className=" h-3/4">
-                    <CommentSection />
+                <div className="overflow-y-auto " style={{ height: "32rem" }}>
+
+                    {
+                        commentArray && <CommentSection comments={commentArray} ></CommentSection>
+                    }
                 </div>
                 <hr></hr>
-                <div className=" flex space-x-4">
-                    <button className="ml-2" >
-                        <Image className="w-8 h-8" src={outlineLikeIcon} alt="outlineLikeIcon"></Image>
-                    </button>
+                <div className="flex  space-x-4">
+
+
+                    <label htmlFor="likeButton" className="flex  ml-2 cursor-pointer"  >
+                        {
+                            liked ?
+                                <Image className="w-8 h-8" src={filledLikeIcon} alt="filledLikeIcon"></Image>
+                                :
+                                <Image className="w-8 h-8" src={outlineLikeIcon} alt="outlineLikeIcon"></Image>
+                        }
+                    </label>
+                    <input id="likeButton" type="checkbox" onChange={(e) => handleLikeStatus(e)} defaultChecked={liked} hidden>
+                    </input>
                     <button>
                         <Image className="w-10 h-10" src={commentIcon} alt="commentIcon"></Image>
 
@@ -92,18 +137,23 @@ const PostContent = () => {
 
 
                 </div>
-                <div className="ml-2 text-sm">{ } Likes</div>
+
+                {
+                    postData?.likesCount > 0 ? <div className="ml-2 text-sm">{postData.likesCount || ""} Likes</div> : ""
+                }
+
                 <hr className="mt-2"></hr>
                 {
-                    postData.commentPermission &&
+                    postData?.commentPermission &&
 
-                    <form className="p-2 flex content-center grid grid-cols-5">
-                        <input className="col-span-4 outline-none text-sm text-gray-500" placeholder="Add a comment..."></input>
-
-
-                        <button type="submit" className="col-span-1 text-sm flex justify-end  hover:text-orange-500">Post</button>
-
-
+                    <form onSubmit={handleSubmit} className="p-2 flex content-center grid grid-cols-5">
+                        <input name="commentContent" type="text"
+                            required
+                            className="col-span-4 outline-none text-sm text-gray-500"
+                            placeholder="Add a comment..."
+                            value={comment || ""}
+                            onChange={(e) => setComment(e.target.value)}></input>
+                        <button type="submit" className="col-span-1 text-sm flex justify-end hover:text-orange-500">Post</button>
                     </form>
                 }
             </div>

@@ -1,5 +1,6 @@
 
 import mongoose from 'mongoose';
+import { type } from 'os';
 
 const postSchema = mongoose.Schema({
     postCaption: String,
@@ -17,6 +18,21 @@ const postSchema = mongoose.Schema({
         {
             type: mongoose.Schema.Types.ObjectId,
             ref: "Users"
+        }
+    ],
+
+    comments: [
+        {
+
+            user: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "Users",
+            },
+            commentContent: {
+                type: String,
+                required: true,
+            }
+
         }
     ]
 },
