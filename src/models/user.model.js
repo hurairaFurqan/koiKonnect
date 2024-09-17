@@ -49,16 +49,6 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: false,
     },
-
-    followers: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Users",
-    }],
-    following: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Users",
-    }],
-     
     forgotPasswordToken: String,
     forgotPasswordTokenExpiry: Date,
     verifyToken: String,

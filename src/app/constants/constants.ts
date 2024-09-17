@@ -26,7 +26,8 @@ export const authUrlSlug = {
 export const currentUser = {
     uploadCoverPhoto : "/uploadCoverPhoto",
     getCurrentUser: "/getCurrentUser",
-    followUser: "/followUser"
+    followUser: "/followUser",
+    getFollowStatus: "/getFollowStatus"
 }
 
 
