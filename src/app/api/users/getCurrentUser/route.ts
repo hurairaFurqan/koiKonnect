@@ -1,19 +1,19 @@
-import { connect } from "@/src/dbConfig/dbConfig";
-import Post from "@/src/models/posts.model";
 import User from "@/src/models/user.model";
-import mongoose from "mongoose";
-const ObjectId = mongoose.Types.ObjectId;
+
+import { connect } from "@/src/dbConfig/dbConfig";
 
 import { NextRequest, NextResponse } from "next/server";
+import Post from "@/src/models/posts.model";
+import { ObjectId } from "mongodb";
 
 connect()
 
 export async function POST(req: NextRequest) {
     try {
         const { userId } = await req.json();
-
-        const user = await User.findById(userId).select("-password");
-
+        
+        // const user = await User.findById(userId).select("-password").populate("posts");
+        
         const posts = await User.aggregate([
             {
                 $match: { "_id": ObjectId.createFromHexString(userId) }
@@ -24,11 +24,7 @@ export async function POST(req: NextRequest) {
             }
         ]);
 
-
-
-        // await User.find().populate("posts").then(p => console.log(p)).catch(error => console.log(error))
-
-        return NextResponse.json({ success: true, message: "Cover photo retrieved successfully", user: posts[0] }, { status: 200 })
+        return NextResponse.json({ success: true, message: "User retrieved successfully", user: posts[0] }, { status: 200 })
     } catch (error: any) {
         console.log(error.message);
 

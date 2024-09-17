@@ -51,4 +51,45 @@
 .svgColor {
   color: black;
 }
+/* Search container */
 
+/* Ensure the container for the user list is positioned correctly */
+.cardContainer {
+  position: absolute; /* Adjust this if needed based on your layout */
+  top: 100%; /* Position it just below the search bar */
+  left: 0;
+  width: 100%; /* Full width, you can adjust if needed */
+  z-index: 999; /* Ensure it is above other components */
+  background-color: white; /* Optional: background color for the card */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: shadow for the card */
+}
+
+/* Style the list and its items */
+.userList {
+  list-style-type: none; /* Remove default list styling */
+  padding: 0;
+  margin: 0;
+}
+
+/* Style for individual user cards */
+.card {
+  padding: 16px;
+  margin: 0;
+  border-bottom: 1px solid #ddd; /* Optional: border between items */
+  background-color: #f9f9f9; /* Optional: card background color */
+}
+
+.card:last-child {
+  border-bottom: none; /* Remove border from the last item */
+}
+
+/* Optional: Style for the text inside the card */
+.card p {
+  margin: 0;
+  font-size: 16px;
+  color: #333;
+}
+
+
+
+/* styles for Comment Section and post Content */

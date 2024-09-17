@@ -1,8 +1,6 @@
-
 import mongoose from 'mongoose';
-import { type } from 'os';
 
-const postSchema = mongoose.Schema({
+const postSchema = new mongoose.Schema({  
     postCaption: String,
     location: String,
     imageURL: String,
@@ -10,9 +8,8 @@ const postSchema = mongoose.Schema({
     privacyPermission: Boolean,
     userId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Users",
+        ref: "Users", 
     },
-
     likesCount: Number,
     likes: [
         {
@@ -20,10 +17,8 @@ const postSchema = mongoose.Schema({
             ref: "Users"
         }
     ],
-
     comments: [
         {
-
             user: {
                 type: mongoose.Schema.Types.ObjectId,
                 ref: "Users",
@@ -32,13 +27,10 @@ const postSchema = mongoose.Schema({
                 type: String,
                 required: true,
             }
-
         }
     ]
-},
-    { timestamps: true }
-)
+}, { timestamps: true });
 
-const Post = mongoose.models.Posts || mongoose.model("Posts", postSchema);
+const Post = mongoose.models.Post || mongoose.model("Post", postSchema);  
 
 export default Post;

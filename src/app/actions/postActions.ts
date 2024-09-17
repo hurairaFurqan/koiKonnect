@@ -2,7 +2,7 @@
 
 import axios from "axios";
 import { getDataFromToken } from "./_actions"
-import { BASIC_AUTH_URL_POSTS, postSlug } from "../constants/constants";
+import { BASIC_AUTH_URL_POSTS, BASIC_AUTH_URL_USERS, currentUser, postSlug } from "../constants/constants";
 import { commentSchema } from "@/src/helpers/zodSchema";
 import { revalidatePath } from "next/cache";
 
