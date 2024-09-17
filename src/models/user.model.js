@@ -4,17 +4,18 @@ const userSchema = new mongoose.Schema({
     userName: {
         type: String,
         required: [true, "Please provide a username"],
-        unique: true
+        unique: true,
+        index: true,
     },
     fName: {
         type: String,
         required: [true, "Please provide a firsName"],
-
+        index: true,
     },
     lName: {
         type: String,
         required: [true, "Please provide a Last Name"],
-
+        index: true,
     },
     email: {
         type: String,
@@ -48,6 +49,15 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: false,
     },
+
+    followers: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Users",
+    }],
+    following: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Users",
+    }],
      
     forgotPasswordToken: String,
     forgotPasswordTokenExpiry: Date,
@@ -55,15 +65,6 @@ const userSchema = new mongoose.Schema({
     verifyTokenExpiry: Date,
     localProfileImageUrl: String,
 }, { timestamps: true });
-
-// userSchema.virtual('posts', {
-//     ref: "posts",
-//     localField: "_id",
-//     foreignField: "users"
-// });
-
-// userSchema.set('toObject', { virtuals: true });
-// userSchema.set('toJSON', { virtuals: true });
 
 const User = mongoose.models.Users || mongoose.model("Users", userSchema);
 

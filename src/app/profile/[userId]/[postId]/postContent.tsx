@@ -1,7 +1,7 @@
 "use client"
 
 import { userInfoRetrieval } from "@/src/app/actions/_actions";
-import { postRetrieval } from "@/src/app/actions/retrievalActions";
+import { postRetrieval, userRetrievalBasedOnId } from "@/src/app/actions/retrievalActions";
 import Image from "next/image";
 import profileIcon from "@/public/icons/profileIcon.svg"
 import menuIcon from "@/public/icons/menuIcon.svg"
@@ -23,12 +23,13 @@ const PostContent = () => {
     const [comment, setComment] = useState("");
     const params = useParams();
     const postId: string = params.postId as string;
-
+    const userId: string = params.userId as string;
     const [postData, setPostData] = useState({
         imageURL: "",
         commentPermission: false,
         likesCount: 0,
     });
+
     const [userData, setUserData] = useState({
         localProfileImageUrl: "",
         userName: "",
@@ -68,7 +69,9 @@ const PostContent = () => {
 
 
                 setCommentArray(data?.post?.comments);
-                const userInfo = await userInfoRetrieval();
+                const userInfo = await userRetrievalBasedOnId(userId);
+                console.log(userInfo);
+                
                 setPostData(post);
                 setLiked(liked);
                 setUserData(userInfo);
@@ -144,7 +147,7 @@ const PostContent = () => {
 
                 <hr className="mt-2"></hr>
                 {
-                    !postData?.commentPermission &&
+                    postData?.commentPermission &&
 
                     <form onSubmit={handleSubmit} className="p-2 flex content-center grid grid-cols-5">
                         <input name="commentContent" type="text"

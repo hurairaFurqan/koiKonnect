@@ -26,6 +26,12 @@ export const authUrlSlug = {
 export const currentUser = {
     uploadCoverPhoto : "/uploadCoverPhoto",
     getCurrentUser: "/getCurrentUser",
+    followUser: "/followUser"
+}
+
+
+export const searchSlugs= {
+    searchUser : "/searchUser",
 }
 
 
@@ -43,4 +49,17 @@ export const settingsSideBaUrlSlug = {
     chatSettings: `${sideNavUrlSlug.settings}/chatSettings`,
     notificationSettings: `${sideNavUrlSlug.settings}/notificationSettings`,
     appearanceSettings: `${sideNavUrlSlug.settings}/appearanceSettings`
+}
+
+
+export const linkHrefSlugs = {
+    followers: "/profile/settings/followers",
+    following: "/profile/settings/following",
+    profile: "/profile/settings",
+}
+
+export const openModal = {
+    query: "modal=true",
+    settingModalPath: "/profile/settings",
+    // searchResultModalPath: "/"
 }

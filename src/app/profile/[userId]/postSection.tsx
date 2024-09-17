@@ -26,15 +26,19 @@ const PostSection: React.FC<post> = async (props: post, SearchParamProps) => {
 
     const { searchParams } = SearchParamProps || false;
     const modal = searchParams?.modal;
-    const { imageURL, _id } = props;
+    const { imageURL, _id, userId } = props;
+
+    const postId = _id;
+    
+    
     return (<>
         <div className=""  >
 
-            <Link href={`${openModal.settingModalPath}/${_id}?${openModal.query}`}>
+            <Link href={`/profile/${userId}/${_id}?${openModal.query}`}>
                 <Image src={imageURL} alt="picture" width={200} height={200}></Image>
             </Link>
             {
-                modal && <PostModal />
+                modal && <PostModal params= {{userId, postId}}/>
             }
         </div>
     </>)

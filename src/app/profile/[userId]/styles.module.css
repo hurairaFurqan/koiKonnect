@@ -1,0 +1,122 @@
+/* Layout */
+
+.verticalLine {
+    border-left: 1px solid #E1E1E1;
+    height: 100%;
+    margin-left: 25%;
+    top: 2px;
+    z-index: 3;
+    position: absolute;
+}
+
+.horizontalLine {
+    border-top: 1px solid #E1E1E1;
+    width: 100%;
+    left: 2px;
+    margin-top: 3%;
+    position: absolute;
+    z-index: 2;
+}
+
+.base {
+    background-color: #FFFFFF;
+    height: 90%;
+    z-index: 1;
+    border-radius: 10px;
+    position: relative;
+}
+
+/* Page => user current profile */
+
+.iconDiv {
+    position: absolute;
+    border-radius: 10%;
+    color: black;
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 2;
+    left: 0;
+    bottom: 0;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+
+.Image {
+    position: relative;
+    z-index: 1;
+    
+}
+
+
+
+/* Cover and profile Picture layer */
+.coverDiv {
+    position: relative;
+    z-index: 1;
+}
+
+.profileImageDiv {
+    position: absolute;
+    width: fit-content;
+    height: fit-content;
+
+;
+    z-index: 2;
+    margin-top: 13%;
+    margin-left: 45%;
+
+}
+
+
+/* Post Section */
+
+
+.shadowPost{
+    box-shadow: none;
+}
+
+.shadowPost:hover{
+    box-shadow: 10px 10px;
+}
+
+
+
+/* Follow & Message Button */
+/* p-2 text-white rounded hover:text-black hover:bg-transparent	hover:border-orange-500 hover:border-rounded 
+style={{backgroundColor:"#F36E39", width:"8rem"}}
+*/
+.followButton{
+    padding: 0.5rem;
+    color: white;
+    border-radius: 0.25rem;
+    background-color: #F36E39;
+    width: 8rem;
+}
+
+.followButton:hover{
+    color: black;
+    width: 8rem;
+    background-color: transparent;
+    border: 1px solid #F36E39;
+}
+
+
+.messageButton{
+    padding: 0.5rem;
+    color: #F36E39;
+    border-radius: 0.25rem;
+    background-color: #D9D9D9;
+    width: 8rem;
+}
+
+.messageButton:hover{
+    color: black;
+    width: 8rem;
+    background-color: transparent;
+    border: 1px solid #F36E39;
+}
