@@ -45,6 +45,19 @@ export async function postRetrieval(postId: string) {
 }
 
 
+export async function getFollowStatus(targetUserId: string) {
+    try {
+        const userId = await getDataFromToken();
+        
+        const res = await axios.post(`${BASIC_AUTH_URL_USERS}${currentUser.getFollowStatus}`, { userId, targetUserId });
+        return res.data;
+    } catch (error: any) {
+        console.log(error.response);
+
+    }
+}
+
+
 
 export async function searchUsers(query: string) {
     try {
