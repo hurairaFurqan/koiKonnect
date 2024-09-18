@@ -6,10 +6,10 @@ import { postSlug, BASIC_AUTH_URL_POSTS, BASIC_AUTH_URL_USERS, currentUser, sear
 import { revalidatePath } from "next/cache";
 
 
-export async function userRetrieval() {
+export async function userRetrieval(targetUserId?: string) {
 
     try {
-        const userId = await getDataFromToken()
+        const userId = targetUserId ? targetUserId : await getDataFromToken()
         const res = await axios.post(`${BASIC_AUTH_URL_USERS}${currentUser.getCurrentUser}`, { userId });
 
         return res.data.user;
@@ -48,8 +48,50 @@ export async function postRetrieval(postId: string) {
 export async function getFollowStatus(targetUserId: string) {
     try {
         const userId = await getDataFromToken();
-        
+
         const res = await axios.post(`${BASIC_AUTH_URL_USERS}${currentUser.getFollowStatus}`, { userId, targetUserId });
+        return res.data;
+    } catch (error: any) {
+        console.log(error.response);
+
+    }
+}
+
+export async function searchUsers(query: string) {
+    try {
+
+        const userId = await getDataFromToken();
+        const res = await axios.post(`${BASIC_AUTH_URL_USERS}${searchSlugs.searchUser}`, { query, userId });
+
+        return res?.data?.users;
+
+    } catch (error: any) {
+        console.error("Error fetching results", error);
+
+
+    }
+}
+
+
+export async function getFollowers(targetUserId?: string) {
+    try {
+        const userId = targetUserId ? targetUserId : await getDataFromToken();
+
+        const res = await axios.post(`${BASIC_AUTH_URL_USERS}${currentUser.getFollowers}`, { userId });
+        return res.data;
+    } catch (error: any) {
+        console.log(error.response);
+
+    }
+}
+
+
+export async function getFollowing(targetUserId?: string) {
+    try {
+        const userId = targetUserId ? targetUserId : await getDataFromToken();
+
+        const res = await axios.post(`${BASIC_AUTH_URL_USERS}${currentUser.getFollowing}`, { userId });
+
         return res.data;
     } catch (error: any) {
         console.log(error.response);
@@ -59,17 +101,15 @@ export async function getFollowStatus(targetUserId: string) {
 
 
 
-export async function searchUsers(query: string) {
+export async function getAllPosts() {
     try {
-
-        const userId = await getDataFromToken();
-        const res = await axios.post(`${BASIC_AUTH_URL_USERS}${searchSlugs.searchUser}`, { query, userId });
+        const res = await axios.post(`${BASIC_AUTH_URL_POSTS}${postSlug.getAllPosts}`);
         
-        return res?.data?.users;
-
+        return res.data.posts;
     } catch (error: any) {
-        console.error("Error fetching results", error);
-
+        console.log(error.response);
 
     }
 }
+
+

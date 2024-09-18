@@ -27,7 +27,9 @@ export const currentUser = {
     uploadCoverPhoto : "/uploadCoverPhoto",
     getCurrentUser: "/getCurrentUser",
     followUser: "/followUser",
-    getFollowStatus: "/getFollowStatus"
+    getFollowStatus: "/getFollowStatus",
+    getFollowers: "/getFollowers",
+    getFollowing: "/getFollowing"
 }
 
 
@@ -42,6 +44,7 @@ export const postSlug = {
     getPost: "/getPost",
     postLikeStatus: "/postLikeStatus",
     postComment : "/postComment",
+    getAllPosts: "/getAllPosts",
 }
 
 export const settingsSideBaUrlSlug = {

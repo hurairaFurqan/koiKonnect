@@ -1,6 +1,6 @@
 
 import profileIcon from "@/public/icons/profileIcon.svg"
-import { userRetrieval } from "@/src/app/actions/retrievalActions";
+import { getFollowers, getFollowing, userRetrieval } from "@/src/app/actions/retrievalActions";
 import CoverPhoto from "./coverPhoto";
 import Image from "next/image";
 import genderIcon from "@/public/icons/genderIcon.svg";
@@ -29,8 +29,15 @@ export default async function Settings() {
 
     const data = await userRetrieval();
 
-    
+
+    const followers = await getFollowers();
+
+    const following = await getFollowing();
+
+
     const userPosts = await data?.userPosts || [];
+
+    const userPostsCount = userPosts.length;
 
     const profileUrl = data?.localProfileImageUrl || ""
 
@@ -56,19 +63,20 @@ export default async function Settings() {
             <div className="flex  justify-center">
                 <div className="mt-3 flex  place-content-between text-xs w-1/4 ">
                     <div className="flex flex-col items-center">
-                        10
+                        {userPostsCount || 0}
                         <div>
                             Posts
                         </div>
                     </div>
                     <Link href={`${linkHrefSlugs.followers}`} className="flex  flex-col items-center">
-                        12
+                        {followers?.followerCount || 0}
                         <div>
                             Followers
                         </div>
                     </Link>
                     <Link href={`${linkHrefSlugs.following}`} className="flex flex-col items-center">
-                        10
+                        {following?.followingCount || 0}
+
                         <div>
                             Following
                         </div>
@@ -79,7 +87,7 @@ export default async function Settings() {
             {/* Side Information & Posts Section */}
 
             <div className="grid grid-cols-4 mt-2 " style={{ height: "16rem" }}>
-                <div className="col-span-1 p-2 text-xs h-3/5 rounded-lg" style={{ backgroundColor: "#F4F4F4", width:"95%" }}>
+                <div className="col-span-1 p-2 text-xs h-3/5 rounded-lg" style={{ backgroundColor: "#F4F4F4", width: "95%" }}>
                     <div className="h-full flex flex-col place-content-between	">
                         <div style={{ color: "#5E5E5E" }}>Personal Information</div>
                         <div className="flex space-x-4">
@@ -101,7 +109,7 @@ export default async function Settings() {
                     </div>
 
                 </div>
-                <div className="col-span-3 rounded-lg p-2 bg-slate-100 flex flex-wrap gap-1 overflow-y-auto h-50" style={{ backgroundColor: "#F4F4F4"}}>
+                <div className="col-span-3 rounded-lg p-2 bg-slate-100 flex flex-wrap gap-1 overflow-y-auto h-50" style={{ backgroundColor: "#F4F4F4" }}>
                     {
                         userPosts && userPosts.map((post: post) => {
 

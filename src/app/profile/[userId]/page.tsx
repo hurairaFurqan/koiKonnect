@@ -1,6 +1,6 @@
 
 import profileIcon from "@/public/icons/profileIcon.svg"
-import { userRetrievalBasedOnId } from "@/src/app/actions/retrievalActions";
+import { getFollowers, getFollowing, userRetrieval } from "@/src/app/actions/retrievalActions";
 
 import Image from "next/image";
 import genderIcon from "@/public/icons/genderIcon.svg";
@@ -30,9 +30,21 @@ interface post {
 export default async function UserId({ params }: { params: { userId: string } }) {
 
     const userId = params.userId;
-    const data = await userRetrievalBasedOnId(userId);
-    
+    const data = await userRetrieval(userId);
+
     const userPosts = await data?.userPosts || [];
+
+
+    const followers = await getFollowers(userId);
+
+    
+
+    
+
+    const following = await getFollowing(userId);
+
+
+    const userPostsCount = userPosts.length;
 
 
     const profileUrl = data?.localProfileImageUrl || ""
@@ -54,7 +66,7 @@ export default async function UserId({ params }: { params: { userId: string } })
             </div>
             <div className=" mt-4 grid grid-cols-2">
                 <div className=" pr-16 flex justify-center">
-                    <FollowButton />
+                    <FollowButton userId = {userId}/>
                 </div>
                 <div className=" pl-16 flex justify-center">
                     <MessageButton />
@@ -73,19 +85,19 @@ export default async function UserId({ params }: { params: { userId: string } })
             <div className="flex  justify-center">
                 <div className="mt-3 flex  place-content-between text-xs w-1/4 ">
                     <div className="flex flex-col items-center">
-                        10
+                        {userPostsCount || 0}
                         <div>
                             Posts
                         </div>
                     </div>
                     <Link href={`${linkHrefSlugs.followers}`} className="flex  flex-col items-center">
-                        12
+                        {followers?.followerCount || 0}
                         <div>
                             Followers
                         </div>
                     </Link>
                     <Link href={`${linkHrefSlugs.following}`} className="flex flex-col items-center">
-                        10
+                        {following?.followingCount || 0}
                         <div>
                             Following
                         </div>

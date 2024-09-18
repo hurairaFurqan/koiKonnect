@@ -18,11 +18,17 @@ import { sideNavUrlSlug } from "../constants/constants";
 
 interface UserImageUpdateProps {
     profileUrl: string,
+    userName: string,
+    fName: string,
+    lName: string,
+    userPostsCount: number,
+    followerCount: number,
+    followingCount: number
 }
 
 const SideBar: React.FC<UserImageUpdateProps> = (props: UserImageUpdateProps) => {
 
-    const { profileUrl } = props;
+    const { profileUrl, userName, fName, lName, userPostsCount, followerCount, followingCount } = props;
     const router = useRouter();
     const handleLogout = async () => {
         await deleteToken();
@@ -39,26 +45,26 @@ const SideBar: React.FC<UserImageUpdateProps> = (props: UserImageUpdateProps) =>
             </div>
             <div className="mt-4 space-y-2 flex flex-col items-center">
                 <Image className="rounded-full w-24 h-24 border border-orange-500" src={profileUrl || profileIcon} alt="user profile avatar" width={22} height={24} unoptimized></Image>
-                <div className="font-semibold">User First and Last Name</div>
-                <div className="orangeColor text-xs">@userName</div>
+                <div className="font-semibold">{fName} {lName}</div>
+                <div className="orangeColor text-xs">@{userName}</div>
             </div>
             <div className="mt-3 flex place-content-around text-xs">
                 <div className="flex flex-col items-center">
-                    10
+                    {userPostsCount}
                     <div>
                         Posts
                     </div>
                 </div>
                 <div className={styles.vl}></div>
                 <div className="flex flex-col items-center">
-                    12
+                    {followerCount}
                     <div>
                         Followers
                     </div>
                 </div>
                 <div className={styles.vl}></div>
                 <div className="flex flex-col items-center">
-                    10
+                    {followingCount}
                     <div>
                         Following
                     </div>
