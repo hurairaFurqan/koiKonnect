@@ -4,38 +4,30 @@ import styles from "./styles.module.css";
 import { useRouter } from "next/navigation";
 import { followUser } from "../../actions/postActions";
 import { getFollowStatus } from "../../actions/retrievalActions";
-export default function FollowButton() {
+interface FollowButtonProps {
+    userId: string
+}
+const FollowButton: React.FC<FollowButtonProps> = ({ userId }) => {
 
     const [isFollowing, setIsFollowing] = useState(false);
 
-    const [userId, setUserId] = useState<string>("");
 
     const router = useRouter();
 
     useEffect(() => {
-        const pathSegments = window.location.pathname.split("/");
-        const idFromUrl = pathSegments[pathSegments.length - 1];
-        setUserId(idFromUrl);
-    }, []);
-
-
-    useEffect(() => {
         const fetchFollowStatus = async () => {
             try {
-
-                console.log(userId, "in client");
-                
                 const res = await getFollowStatus(userId);
                 setIsFollowing(res.isFollowing)
                 console.log(res);
-                
+
             } catch (error) {
                 console.error("Error while fetching follow status", error);
             }
         };
 
         fetchFollowStatus();
-    },[userId])
+    }, [userId])
 
     const handleFollowToggle = async () => {
 
@@ -46,12 +38,12 @@ export default function FollowButton() {
 
         try {
 
-            const res = await followUser(userId, isFollowing);
+            const res = await followUser(userId, isFollowing ? "unfollow" : "follow");
 
             if (res && res.data && res.data.success) {
                 setIsFollowing(prevState => !prevState);
             } else {
-                
+
                 setIsFollowing(prevState => !prevState);
             }
 
@@ -66,3 +58,5 @@ export default function FollowButton() {
 
     </>)
 }
+
+export default FollowButton;

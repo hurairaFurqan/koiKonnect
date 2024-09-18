@@ -24,11 +24,6 @@ export async function POST(request: NextRequest) {
             return NextResponse.json({ success: false, message: "User(s) not found" }, { status: 404 });
         }
 
-        // const followingEntry = await Following.findOne({userId: userId});
-        // if (!followingEntry) {
-        //     return NextResponse.json({success: false, isFollowing: false}, {status: 200});
-        // }
-
         const followingEntry = await Following.findOne({
             userId, 
             following: {$in : [targetUserId]}
@@ -38,6 +33,7 @@ export async function POST(request: NextRequest) {
         const isFollowing = !!followingEntry;
 
         return NextResponse.json({success: true, isFollowing}, {status: 200})
+
 
 
     } catch (error: any) {

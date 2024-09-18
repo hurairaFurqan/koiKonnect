@@ -1,10 +1,20 @@
-.rightBase{
+.rightBase {
     background-color: #F4F4F4;
-    height: 100%; 
+    height: 100%;
     border-radius: 32px;
 }
-.main{
+
+.main {
     height: 93%;
 }
 
-/*  */
+.postsContainer {
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    overflow-y: auto;
+    height: 40rem;
+    flex: 1;
+}

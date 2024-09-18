@@ -1,7 +1,7 @@
 "use client"
 
 import { userInfoRetrieval } from "@/src/app/actions/_actions";
-import { postRetrieval, userRetrievalBasedOnId } from "@/src/app/actions/retrievalActions";
+import { postRetrieval, userRetrieval, userRetrievalBasedOnId } from "@/src/app/actions/retrievalActions";
 import Image from "next/image";
 import profileIcon from "@/public/icons/profileIcon.svg"
 import menuIcon from "@/public/icons/menuIcon.svg"
@@ -147,7 +147,7 @@ const PostContent = () => {
 
                 <hr className="mt-2"></hr>
                 {
-                    postData?.commentPermission &&
+                    !postData?.commentPermission &&
 
                     <form onSubmit={handleSubmit} className="p-2 flex content-center grid grid-cols-5">
                         <input name="commentContent" type="text"

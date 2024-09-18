@@ -26,12 +26,13 @@ export async function postLike(postId: string, likeStatus: Boolean) {
 }
 
 
-export async function followUser(targetUserId: string, isFollowing: boolean) {
+export async function followUser(targetUserId: string, action: "follow" | "unfollow" | "removeFollower" | "removeFollowing") {
     const userId = await getDataFromToken();
     try {
+        console.log(targetUserId, userId, action, "in follow user actions");
         
         const response = await axios.post(`${BASIC_AUTH_URL_USERS}${currentUser.followUser}`,
-            { targetUserId, action: isFollowing ? "unfollow" : "follow", userId })
+            { targetUserId, action, userId })
             
         return response.data;
     } catch (error: any) {

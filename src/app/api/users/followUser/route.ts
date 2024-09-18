@@ -8,55 +8,79 @@ import Following from "@/src/models/following.model";
 connect();
 
 export async function POST(request: NextRequest) {
-    try {
-        const { targetUserId, userId, action } = await request.json();
-        if (!targetUserId || !userId) {
-            return NextResponse.json({ success: false, message: "User ID(s) missing" }, { status: 400 });
-        }
-
-
-        const currentUser = await User.findById(userId);
-        const targetUser = await User.findById(targetUserId);
-
-        if (!currentUser || !targetUser) {
-            return NextResponse.json({ success: false, message: "User(s) not found" }, { status: 404 });
-        }
-
-        if (action === "follow") {
-            
-            await Followers.findOneAndUpdate(
-              { userId: targetUserId },
-              { $addToSet: { followers: userId } }, 
-              { upsert: true } 
-            );
-            
-            
-            await Following.findOneAndUpdate(
-              { userId },
-              { $addToSet: { following: targetUserId } }, 
-              { upsert: true }
-            );
-            
-            return NextResponse.json({ success: true, message: "Followed successfully" }, {status: 200});
-            
-          } else if (action === "unfollow") {
-            
-            await Followers.findOneAndUpdate(
-              { userId: targetUserId },
-              { $pull: { followers: userId } } 
-            );
-      
-            
-            await Following.findOneAndUpdate(
-              { userId },
-              { $pull: { following: targetUserId } } 
-            );
-      
-            return NextResponse.json({ success: true, message: "Unfollowed successfully" }, {status: 200});
-          }
-
-    } catch (error: any) {
-        return NextResponse.json(error);
-
+  try {
+    const { targetUserId, userId, action } = await request.json();
+    if (!targetUserId || !userId) {
+      return NextResponse.json({ success: false, message: "User ID(s) missing" }, { status: 400 });
     }
+
+
+    const currentUser = await User.findById(userId);
+    const targetUser = await User.findById(targetUserId);
+
+    if (!currentUser || !targetUser) {
+      return NextResponse.json({ success: false, message: "User(s) not found" }, { status: 404 });
+    }
+
+    if (action === "follow") {
+
+      await Followers.findOneAndUpdate(
+        { userId: targetUserId },
+        { $addToSet: { followers: userId } },
+        { upsert: true }
+      );
+
+
+      await Following.findOneAndUpdate(
+        { userId },
+        { $addToSet: { following: targetUserId } },
+        { upsert: true }
+      );
+
+      return NextResponse.json({ success: true, message: "Followed successfully" }, { status: 200 });
+
+    } else if (action === "unfollow") {
+
+      await Followers.findOneAndUpdate(
+        { userId: targetUserId },
+        { $pull: { followers: userId } }
+      );
+
+
+      await Following.findOneAndUpdate(
+        { userId },
+        { $pull: { following: targetUserId } }
+      );
+
+      return NextResponse.json({ success: true, message: "Unfollowed successfully" }, { status: 200 });
+    } else if (action === "removeFollower") {
+
+      await Followers.findOneAndUpdate(
+        { userId },
+        { $pull: { followers: targetUserId } }
+      );
+
+      await Following.findOneAndUpdate(
+        { userId: targetUserId },
+        { $pull: { following: userId } }, { new: true }
+      );
+
+      return NextResponse.json({ success: true, message: "Follower removed successfully" }, { status: 200 });
+    } else if (action === "removeFollowing") {
+      await Following.findOneAndUpdate(
+        { userId },
+        { $pull: { following: targetUserId } }
+      );
+      await Followers.findOneAndUpdate(
+        { userId: targetUserId },
+        { $pull: { followers: userId } }
+      );
+      return NextResponse.json({ success: true, message: "Following removed successfully" }, { status: 200 });
+    }
+
+
+  } catch (error: any) {
+    return NextResponse.json(error);
+
+  }
 }
